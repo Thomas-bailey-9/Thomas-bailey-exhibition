@@ -533,7 +533,7 @@ body.motion-on .scroll-link {
 
     // Everything is completely invisible before the stage releases.
     const disappearance = smooth(
-      (heroProgress - .42) / .40
+      (heroProgress - .30) / .45
     );
 
     const signatureExit = smooth(
@@ -552,7 +552,8 @@ body.motion-on .scroll-link {
       scale(${1 + movement * 1.7})
     `;
 
-    mark.style.opacity = String(1 - disappearance);
+    mark.style.opacity =   
+      heroProgress >= .75 ? "0" : String(1 - disappearance);
 
     signature.style.opacity = String(1 - signatureExit);
     signature.style.transform = `
