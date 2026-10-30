@@ -521,9 +521,50 @@ body.animated .transition-symbol {
     `)
   ];
 
-  scenes.forEach((scene, i) => {
-    if (!i) return;
-    scene.style.setProperty("--reveal-mask", masks[i]);
+    // Each position belongs to the symbol on the outgoing page.
+  // Values are horizontal and vertical fractions of the screen.
+  const desktopOrigins = [
+    [.88, .83], // Portrait: microphone, bottom-right.
+    [.57, .80], // Studio: sliders beside the photograph.
+    [.32, .82], // Podcast: circle beneath the description.
+    [.12, .81], // HBCU: magazine near the left edge.
+    [.88, .83], // Magazine: football circle, bottom-right.
+    [.54, .82]  // Comparison: page beside the design.
+  ];
+
+  const mobileOrigins = [
+    [.87, .88],
+    [.13, .84],
+    [.87, .87],
+    [.13, .86],
+    [.87, .87],
+    [.13, .86]
+  ];
+
+  function originFor(index) {
+    const positions = innerWidth <= 700
+      ? mobileOrigins
+      : desktopOrigins;
+
+    const point = positions[index] || [.85, .83];
+    const bounds = document.getElementById("stage")
+      .getBoundingClientRect();
+
+    return {
+      x: point[0] * bounds.width,
+      y: point[1] * bounds.height
+    };
+  }
+
+  const symbols = scenes.map((scene, i) => {
+    if (i === scenes.length - 1) return null;
+
+    const symbol = document.createElement("span");
+    symbol.className = "transition-symbol";
+    symbol.setAttribute("aria-hidden", "true");
+    symbol.style.setProperty("--symbol-mask", masks[i + 1]);
+    scene.appendChild(symbol);
+    return symbol;
   });
 
   function setMaskSize(scene, value) {
