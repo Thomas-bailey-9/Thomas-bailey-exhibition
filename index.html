@@ -1,1 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eeeae1">
+<title>Thomas Bailey — Selected Work</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --paper: #eeeae1;
+  --ink: #23362d;
+}
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+}
+a { color: inherit; }
+button { font: inherit; }
+a:focus-visible, button:focus-visible {
+  outline: 3px solid #d6924e;
+  outline-offset: 6px;
+}
+header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 5vw;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+.brand {
+  text-decoration: none;
+  font-family: Manrope, sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -.7px;
+}
+header nav { display: flex; gap: 22px; align-items: center; }
+header nav a, header button {
+  font-size: 12px;
+  text-decoration: none;
+}
+header button {
+  background: none;
+  border: 0;
+  color: inherit;
+  padding: 8px 0;
+  cursor: pointer;
+}
+.scene {
+  min-height: 100svh;
+  padding: 110px 6vw 70px;
+  background: var(--scene-bg, var(--paper));
+  color: var(--scene-color, var(--ink));
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 6vw;
+  align-items: center;
+  overflow: hidden;
+}
+.copy { max-width: 510px; }
+.eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin: 0 0 22px;
+}
+h1, h2, h3 {
+  font-family: Manrope, sans-serif;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -.065em;
+  line-height: 1.03;
+}
+h1 { font-size: clamp(62px, 8.5vw, 142px); }
+h2 { font-size: clamp(42px, 5.8vw, 92px); }
+.copy p:not(.eyebrow) {
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.65;
+  max-width: 390px;
+  margin: 24px 0 0;
+}
+.copy .hint {
+  font-size: 13px !important;
+  border-left: 1px solid currentColor;
+  padding-left: 16px;
+  opacity: .8;
+}
+.text-link {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 13px;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 6px;
+}
+.visual {
+  position: relative;
+  width: 100%;
+  height: 68svh;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.portrait .visual {
+  width: 78%;
+  height: 72svh;
+  justify-self: center;
+}
+.portrait img {
+  object-fit: cover;
+  object-position: 50% 56%;
+}
+.portrait h1 {
+  background: linear-gradient(125deg, #1f3028, #57725f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.studio {
+  --scene-bg: #172d25;
+  --scene-color: #f2eee4;
+}
+.studio .visual img {
+  object-fit: cover;
+  object-position: center;
+}
+.podcast { --scene-bg: #e7e2d6; }
+.hbcu {
+  --scene-bg: #1733ba;
+  --scene-color: #fff;
+}
+.editorial { --scene-bg: #dfd7ca; }
+.editorial .visual img { object-fit: cover; }
+.analysis {
+  --scene-bg: #24372f;
+  --scene-color: #f3eee4;
+}
+.statistics { --scene-bg: #ede9e1; }
+
+.chapter-number {
+  position: absolute;
+  bottom: 24px;
+  left: 6vw;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  opacity: .6;
+}
+.end {
+  background: #172b23;
+  color: #f2eee4;
+  min-height: 85svh;
+  padding: 110px 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.end h2 { max-width: 900px; }
+.end p { max-width: 540px; line-height: 1.8; }
+.end .links { display: flex; flex-wrap: wrap; gap: 28px; }
+footer {
+  margin-top: 70px;
+  font-size: 12px;
+  opacity: .6;
+}
+.progress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  z-index: 60;
+  background: #bd925d;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.counter {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 5vw;
+  z-index: 40;
+  color: white;
+  mix-blend-mode: difference;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+/* Animation is enabled only after JavaScript has initialized. */
+body.animated .journey { height: var(--journey-height); }
+body.animated .stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+body.animated .scene {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  min-height: 0;
+  will-change: transform, clip-path;
+}
+body.animated .visual,
+body.animated .copy {
+  will-change: transform, opacity;
+}
+body.animated .counter { display: block; }
+
+@media (max-width: 700px) {
+  header { padding: 17px 6vw; }
+  .brand { font-size: 16px; }
+  header nav { gap: 14px; }
+  header nav a, header button { font-size: 10px; }
+  .scene {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 22px;
+    padding: 90px 7vw 55px;
+    align-content: center;
+  }
+  .copy { max-width: 100%; }
+  h1 { font-size: clamp(54px, 15vw, 85px); }
+  h2 { font-size: clamp(37px, 10vw, 58px); }
+  .eyebrow { font-size: 9px; margin-bottom: 12px; }
+  .copy p:not(.eyebrow) {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 13px;
+    max-width: 440px;
+  }
+  .copy .hint { font-size: 11px !important; }
+  .text-link { margin-top: 12px; font-size: 11px; }
+  .visual, .portrait .visual {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+  .portrait .visual { width: 76%; }
+  .portrait img { object-position: 50% 55%; }
+  body:not(.animated) .visual {
+    height: 55svh;
+  }
+  .chapter-number { bottom: 20px; font-size: 9px; }
+  .counter { bottom: 20px; font-size: 9px; }
+  .end { padding: 95px 7vw 65px; }
+}
+@media (max-height: 620px) and (min-width: 701px) {
+  .scene { padding-top: 85px; padding-bottom: 45px; }
+  h1 { font-size: 70px; }
+  h2 { font-size: 48px; }
+  .copy p:not(.eyebrow) { font-size: 14px; margin-top: 14px; }
+  .visual, .portrait .visual { height: 70svh; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <a class="brand" href="#">Thomas Bailey</a>
+  <nav>
+    <button id="motion" type="button" aria-pressed="false">Reduce motion</button>
+    <a href="https://thomasbaileyportfolio.lovable.app"
+       target="_blank" rel="noopener">Full portfolio ↗</a>
+  </nav>
+</header>
+
+<main>
+<div class="journey" id="journey">
+<div class="stage" id="stage">
+
+<section class="scene portrait" aria-labelledby="title">
+  <div class="copy">
+    <p class="eyebrow">Media / Sport / Creative work</p>
+    <h1 id="title">Thomas<br>Bailey.</h1>
+    <p>A three-year international scholarship recipient with experience in sports media, podcast production and editorial design.</p>
+    <p class="hint">Scroll to explore my work. You control the pace—scroll slowly to look closer, or faster to move ahead.</p>
+  </div>
+  <div class="visual">
+    <img src="6.jpg" alt="Thomas Bailey wearing headphones at a studio microphone"
+         fetchpriority="high">
+  </div>
+  <span class="chapter-number">01 / THE PERSON BEHIND THE WORK</span>
+</section>
+
+<section class="scene studio" aria-labelledby="studio-title">
+  <div class="copy">
+    <p class="eyebrow">Audio / Production</p>
+    <h2 id="studio-title">Behind the<br>conversation.</h2>
+    <p>From operating the soundboard to editing audio and contributing on mic: my work with the Lions Country Podcast at Florida Memorial University.</p>
+    <a class="text-link" href="podcast studio setup.jpg" target="_blank" rel="noopener">View photograph ↗</a>
+  </div>
+  <div class="visual">
+    <img src="podcast studio setup.jpg" alt="Podcast studio with microphones and an audio mixing desk">
+  </div>
+  <span class="chapter-number">02 / INSIDE THE STUDIO</span>
+</section>
+
+<section class="scene podcast" aria-labelledby="podcast-title">
+  <div class="copy">
+    <p class="eyebrow">Lions Country Podcast</p>
+    <h2 id="podcast-title">A platform<br>for voices.</h2>
+    <p>Conversations, interviews and perspectives from the Florida Memorial University community.</p>
+    <a class="text-link" href="lions country pod flyer.jpg" target="_blank" rel="noopener">View project poster ↗</a>
+  </div>
+  <div class="visual">
+    <img src="lions country pod flyer.jpg" alt="Blue and orange Lions Country Podcast promotional poster">
+  </div>
+  <span class="chapter-number">03 / THE PODCAST</span>
+</section>
+
+<section class="scene hbcu" aria-labelledby="hbcu-title">
+  <div class="copy">
+    <p class="eyebrow">Episode spotlight</p>
+    <h2 id="hbcu-title">Dear<br>My HBCU.</h2>
+    <p>An episode from Lions Country Podcast, bringing another perspective to the university conversation.</p>
+    <a class="text-link" href="dear-my-hbcu.jpg" target="_blank" rel="noopener">View episode artwork ↗</a>
+  </div>
+  <div class="visual">
+    <img src="dear-my-hbcu.jpg" alt="Dear My HBCU episode artwork with white lettering and flowers on blue">
+  </div>
+  <span class="chapter-number">04 / EPISODE ARTWORK</span>
+</section>
+
+<section class="scene editorial" aria-labelledby="editorial-title">
+  <div class="copy">
+    <p class="eyebrow">Photography / Print</p>
+    <h2 id="editorial-title">From an idea<br>to a printed page.</h2>
+    <p>A student photography magazine created collaboratively with fellow students. A chance to bring photographs, layout and storytelling together in print.</p>
+    <a class="text-link" href="editorial-publication.jpg" target="_blank" rel="noopener">View photograph ↗</a>
+  </div>
+  <div class="visual">
+    <img src="editorial-publication.jpg" alt="Thomas holding an open copy of the collaborative student photography magazine">
+  </div>
+  <span class="chapter-number">05 / THE PHOTOGRAPHY MAGAZINE</span>
+</section>
+
+<section class="scene analysis" aria-labelledby="analysis-title">
+  <div class="copy">
+    <p class="eyebrow">Football / Visual storytelling</p>
+    <h2 id="analysis-title">One position.<br>Different styles.</h2>
+    <p>A full-back comparison concept exploring how typography, player imagery and pitch graphics can make football analysis easier to follow.</p>
+    <a class="text-link" href="fullback-comparison.jpg" target="_blank" rel="noopener">Open full design ↗</a>
+  </div>
+  <div class="visual">
+    <img src="fullback-comparison.jpg" alt="Football editorial concept comparing Achraf Hakimi and Dani Alves">
+  </div>
+  <span class="chapter-number">06 / EDITORIAL DESIGN CONCEPT</span>
+</section>
+
+<section class="scene statistics" aria-labelledby="statistics-title">
+  <div class="copy">
+    <p class="eyebrow">Information / Design</p>
+    <h2 id="statistics-title">Making the<br>numbers visual.</h2>
+    <p>A football statistics layout concept, combining charts, a shot map and a clear reading order. Presented as a design study.</p>
+    <a class="text-link" href="match-statistics.jpg" target="_blank" rel="noopener">Open full design ↗</a>
+  </div>
+  <div class="visual">
+    <img src="match-statistics.jpg" alt="Football statistics design concept featuring Liverpool and Burnley">
+  </div>
+  <span class="chapter-number">07 / DATA DESIGN CONCEPT</span>
+</section>
+
+</div>
+</div>
+
+<section class="end">
+  <p class="eyebrow">The next chapter</p>
+  <h2>More to make.<br>More to share.</h2>
+  <p>Explore my full portfolio for more projects, interviews and the experience behind the work—or get in touch.</p>
+  <div class="links">
+    <a class="text-link" href="https://thomasbaileyportfolio.lovable.app"
+       target="_blank" rel="noopener">Explore full portfolio ↗</a>
+    <a class="text-link" href="mailto:Tom03bailey@outlook.com">Get in touch ↗</a>
+  </div>
+  <footer>Thomas Bailey · Media, sport & creative work</footer>
+</section>
+</main>
+
+<div class="counter" id="counter" aria-hidden="true">01 / 07</div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<script>
+(() => {
+  const journey = document.getElementById("journey");
+  const scenes = [...document.querySelectorAll(".scene")];
+  const motionButton = document.getElementById("motion");
+  const counter = document.getElementById("counter");
+  const progress = document.getElementById("progress");
+  const preference = matchMedia("(prefers-reduced-motion: reduce)");
+
+  let reduced = preference.matches;
+  let framePending = false;
+  let step = 1;
+  const clamp = (n, min = 0, max = 1) => Math.min(max, Math.max(min, n));
+  const ease = t => t * t * (3 - 2 * t);
+
+  function clearScene(scene) {
+    scene.removeAttribute("style");
+    scene.querySelector(".copy").removeAttribute("style");
+    scene.querySelector(".visual").removeAttribute("style");
+    scene.inert = false;
+  }
+
+  function configure() {
+    const relativePosition = document.body.classList.contains("animated")
+      ? clamp(-journey.getBoundingClientRect().top /
+          Math.max(1, journey.offsetHeight - innerHeight))
+      : 0;
+
+    step = innerHeight * 1.45;
+    journey.style.setProperty(
+      "--journey-height",
+      `${innerHeight + scenes.length * step}px`
+    );
+
+    document.body.classList.toggle("animated", !reduced);
+    scenes.forEach(clearScene);
+    motionButton.textContent = reduced ? "Enable motion" : "Reduce motion";
+    motionButton.setAttribute("aria-pressed", String(reduced));
+
+    if (!reduced && relativePosition > 0) {
+      window.scrollTo(0, journey.offsetTop +
+        relativePosition * (journey.offsetHeight - innerHeight));
+    }
+    render();
+  }
+
+  function render() {
+    framePending = false;
+    const documentTravel = document.documentElement.scrollHeight - innerHeight;
+    progress.style.transform =
+      `scaleX(${clamp(scrollY / Math.max(1, documentTravel))})`;
+
+    if (reduced) return;
+
+    const position = clamp(
+      -journey.getBoundingClientRect().top / step,
+      0, scenes.length
+    );
+
+    let active = 0;
+
+    scenes.forEach((scene, i) => {
+      const copy = scene.querySelector(".copy");
+      const visual = scene.querySelector(".visual");
+
+      /*
+       * Each chapter holds, then the next scene rises across it.
+       * Progress comes directly from native scroll, so reversing
+       * direction reverses the transition immediately.
+       */
+      const entry = i === 0 ? 1 : ease(clamp(
+        (position - (i - 1) - .32) / .68
+      ));
+      const exit = ease(clamp((position - i - .32) / .68));
+
+      scene.style.zIndex = i + 1;
+      scene.style.visibility = entry > 0 ? "visible" : "hidden";
+      scene.style.clipPath = `inset(${(1 - entry) * 100}% 0 0 0)`;
+
+      const lift = (1 - entry) * 14;
+      scene.style.transform = `translate3d(0, ${lift}%, 0)`;
+
+      visual.style.transform =
+        `translate3d(0, ${-exit * 8}%, 0) scale(${1 + exit * .16 + (1 - entry) * .08})`;
+
+      const textEntry = ease(clamp((entry - .3) / .7));
+      copy.style.opacity = textEntry * (1 - exit);
+      copy.style.transform =
+        `translate3d(0, ${(1 - textEntry) * 28 - exit * 24}px, 0)`;
+
+      if (entry > .55) active = i;
+    });
+
+    scenes.forEach((scene, i) => {
+      scene.inert = i !== active;
+    });
+
+    counter.textContent =
+      `${String(active + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`;
+
+    counter.style.opacity =
+      journey.getBoundingClientRect().bottom > innerHeight * .5 ? "1" : "0";
+  }
+
+  function requestRender() {
+    if (!framePending) {
+      framePending = true;
+      requestAnimationFrame(render);
+    }
+  }
+
+  motionButton.addEventListener("click", () => {
+    const activeScene = scenes.find(scene => !scene.inert) || scenes[0];
+    reduced = !reduced;
+    configure();
+    if (reduced) activeScene.scrollIntoView({ block: "start" });
+  });
+
+  preference.addEventListener("change", event => {
+    reduced = event.matches;
+    configure();
+  });
+
+  window.addEventListener("scroll", requestRender, { passive: true });
+  window.addEventListener("resize", configure);
+  configure();
+})();
+</script>
+</body>
+</html>
