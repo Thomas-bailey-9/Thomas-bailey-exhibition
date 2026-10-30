@@ -614,17 +614,43 @@ body.animated .transition-symbol {
       scene.style.clipPath = "none";
       scene.style.transform = "none";
 
+           // Position the visible symbol on this chapter.
+      const symbol = symbols[i];
+
+      if (symbol) {
+        const origin = originFor(i);
+        const symbolGrowth = 1 + smooth(exit / .22) * .3;
+
+        symbol.style.left = `${origin.x}px`;
+        symbol.style.top = `${origin.y}px`;
+        symbol.style.transform =
+          `translate(-50%, -50%) scale(${symbolGrowth})`;
+
+        // It appears with the chapter, then hands over to the reveal.
+        const arrived = i === 0
+          ? 1
+          : smooth((entry - .82) / .18);
+
+        symbol.style.opacity = String(
+          arrived * (1 - smooth(exit / .2))
+        );
+      }
+
       if (i > 0) {
-        /*
-         * The incoming scene appears inside the silhouette.
-         * It starts small, then grows beyond the viewport.
-         * Its opacity blends the edge into the outgoing scene.
-         */
+        // Use the previous chapter's symbol as the reveal origin.
+        const origin = originFor(i - 1);
         const growth = Math.pow(smooth(entry), 2.2);
-        const size = 80 + growth * diagonal * 7;
+        const size = 64 + growth * diagonal * 14;
 
         setMaskSize(scene, `${size}px ${size}px`);
-        scene.style.opacity = String(smooth(entry / .24));
+
+        // Pixel offsets keep the mask anchored as it expands.
+        const maskPosition =
+          `${origin.x - size / 2}px ${origin.y - size / 2}px`;
+
+        scene.style.maskPosition = maskPosition;
+        scene.style.webkitMaskPosition = maskPosition;
+        scene.style.opacity = String(smooth(entry / .2));
       } else {
         scene.style.opacity = "1";
       }
