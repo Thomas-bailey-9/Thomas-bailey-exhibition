@@ -300,6 +300,28 @@ body.motion-on .portrait img {
   .next-section { padding: 60px 7vw; }
   footer { padding: 25px 7vw; flex-wrap: wrap; }
 }
+  .hero-stage {
+  perspective: 1000px;
+}
+
+.monogram {
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+}
+
+.hero-signature {
+  letter-spacing: -.08em;
+  font-weight: 600;
+}
+
+body.motion-on .hero {
+  height: 200svh;
+}
+
+body.motion-on .hero-corner,
+body.motion-on .scroll-link {
+  will-change: opacity, transform;
+}
 </style>
 </head>
 
@@ -344,8 +366,9 @@ body.motion-on .portrait img {
         <use href="#tb-shape" class="mark-face"/>
       </svg>
 
-      <h1 class="hero-signature" id="hero-title">
-        Thomas<br>Bailey
+      <h1 class="hero-signature" id="hero-title"
+    aria-label="Thomas Bailey">
+  TB
       </h1>
 
       <p class="hero-corner">
@@ -504,20 +527,50 @@ body.motion-on .portrait img {
       -heroBounds.top / Math.max(1, heroTravel)
     );
 
-    // The large mark moves away as the introduction approaches.
-    mark.style.transform =
-      `translate3d(${-heroProgress * 9}%, 0, 0)
-       scale(${1 + heroProgress * .5})
-       rotate(${-heroProgress * 7}deg)`;
+       // The opening holds briefly, then moves towards the viewer.
+    const movement = smooth(
+      (heroProgress - .08) / .72
+    );
 
-    mark.style.opacity = String(1 - heroProgress * .78);
+    // Everything is completely invisible before the stage releases.
+    const disappearance = smooth(
+      (heroProgress - .42) / .40
+    );
 
-    signature.style.opacity =
-      String(1 - smooth(heroProgress / .65));
+    const signatureExit = smooth(
+      (heroProgress - .06) / .28
+    );
 
-    signature.style.transform =
-      `translate(-50%, -50%)
-       translateY(${-heroProgress * 45}px)`;
+    mark.style.transform = `
+      translate3d(
+        ${-movement * 8}%,
+        ${-movement * 12}%,
+        0
+      )
+      rotateY(${movement * -24}deg)
+      rotateX(${movement * 12}deg)
+      rotateZ(${movement * -8}deg)
+      scale(${1 + movement * 1.7})
+    `;
+
+    mark.style.opacity = String(1 - disappearance);
+
+    signature.style.opacity = String(1 - signatureExit);
+    signature.style.transform = `
+      translate(-50%, -50%)
+      translateY(${-signatureExit * 55}px)
+      scale(${1 + signatureExit * .18})
+    `;
+
+    const corner = document.querySelector(".hero-corner");
+    const scrollLink = document.querySelector(".scroll-link");
+    const detailExit = smooth(heroProgress / .35);
+
+    [corner, scrollLink].forEach(element => {
+      element.style.opacity = String(1 - detailExit);
+      element.style.transform =
+        `translateY(${-detailExit * 20}px)`;
+    });
 
     // Small image movement within its fixed photographic crop.
     const portraitBounds = portrait.parentElement
@@ -563,6 +616,8 @@ body.motion-on .portrait img {
     button.textContent = reduced ? "Enable motion" : "Reduce motion";
     button.setAttribute("aria-pressed", String(reduced));
 
+    document.querySelector(".hero-corner").removeAttribute("style");
+document.querySelector(".scroll-link").removeAttribute("style");
     mark.removeAttribute("style");
     signature.removeAttribute("style");
     portrait.removeAttribute("style");
