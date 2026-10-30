@@ -322,8 +322,10 @@ body.motion-on .hero-corner,
 body.motion-on .scroll-link {
   will-change: opacity, transform;
 }
-.monogram {
-  width: min(66vw, 700px);
+svg.monogram {
+  display: block;
+  width: clamp(180px, 23vw, 310px);
+  height: auto;
   color: #eeeae2;
   transform-origin: 50% 50%;
 }
@@ -340,8 +342,8 @@ body.motion-on .scroll-link {
 }
 
 @media (max-width: 700px) {
-  .monogram {
-    width: 88vw;
+  svg.monogram {
+    width: clamp(170px, 48vw, 230px);
   }
 }
   
