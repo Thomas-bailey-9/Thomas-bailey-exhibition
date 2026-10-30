@@ -274,6 +274,39 @@ body.animated .counter { display: block; }
   .copy p:not(.eyebrow) { font-size: 14px; margin-top: 14px; }
   .visual, .portrait .visual { height: 70svh; }
 }
+  /* Solid lettering replaces the previous gradient. */
+.portrait h1 {
+  background: none;
+  color: #23362d;
+  -webkit-text-fill-color: #23362d;
+}
+
+/* Incoming scenes appear through custom silhouettes. */
+body.animated .scene:not(:first-child) {
+  -webkit-mask-image: var(--reveal-mask);
+  mask-image: var(--reveal-mask);
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: 0 0;
+  mask-size: 0 0;
+
+  will-change: mask-size, opacity;
+}
+
+body.animated .visual {
+  transform-origin: 50% 55%;
+}
+
+/* Keep the normal reading layout when motion is reduced. */
+body:not(.animated) .scene {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
 </style>
 </head>
 
