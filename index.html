@@ -403,6 +403,7 @@ body.animated .counter { display: block; }
 <div class="progress" id="progress" aria-hidden="true"></div>
 
 <script>
+<script>
 (() => {
   const journey = document.getElementById("journey");
   const scenes = [...document.querySelectorAll(".scene")];
@@ -412,87 +413,156 @@ body.animated .counter { display: block; }
   const preference = matchMedia("(prefers-reduced-motion: reduce)");
 
   let reduced = preference.matches;
-  let framePending = false;
+  let pending = false;
   let step = 1;
-  const clamp = (n, min = 0, max = 1) => Math.min(max, Math.max(min, n));
-  const ease = t => t * t * (3 - 2 * t);
+  let active = 0;
 
-  function clearScene(scene) {
-    scene.removeAttribute("style");
-    scene.querySelector(".copy").removeAttribute("style");
-    scene.querySelector(".visual").removeAttribute("style");
-    scene.inert = false;
+  const clamp = n => Math.max(0, Math.min(1, n));
+  const smooth = n => {
+    n = clamp(n);
+    return n * n * (3 - 2 * n);
+  };
+
+  function svgMask(content) {
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 200 200">
+        <g fill="white">${content}</g>
+      </svg>`;
+    return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
   }
 
-  function configure() {
-    const relativePosition = document.body.classList.contains("animated")
-      ? clamp(-journey.getBoundingClientRect().top /
-          Math.max(1, journey.offsetHeight - innerHeight))
-      : 0;
+  const masks = [
+    null,
 
-    step = innerHeight * 1.45;
-    journey.style.setProperty(
-      "--journey-height",
-      `${innerHeight + scenes.length * step}px`
-    );
+    // Microphone: capsule, supporting arm, stem and base.
+    svgMask(`
+      <rect x="66" y="15" width="68" height="110" rx="34"/>
+      <path d="M49 83h10v27a41 41 0 0 0 82 0V83h10v27
+               a51 51 0 0 1-46 51v20h28v10H67v-10h28v-20
+               a51 51 0 0 1-46-51z"/>
+    `),
 
-    document.body.classList.toggle("animated", !reduced);
-    scenes.forEach(clearScene);
-    motionButton.textContent = reduced ? "Enable motion" : "Reduce motion";
-    motionButton.setAttribute("aria-pressed", String(reduced));
+    // Three fader-like strips from the soundboard.
+    svgMask(`
+      <rect x="40" y="25" width="32" height="150" rx="16"/>
+      <rect x="84" y="5" width="32" height="190" rx="16"/>
+      <rect x="128" y="40" width="32" height="120" rx="16"/>
+    `),
 
-    if (!reduced && relativePosition > 0) {
-      window.scrollTo(0, journey.offsetTop +
-        relativePosition * (journey.offsetHeight - innerHeight));
-    }
-    render();
+    // Circular opening into the episode artwork.
+    svgMask(`<circle cx="100" cy="100" r="68"/>`),
+
+    // An open magazine, with a shallow central fold.
+    svgMask(`
+      <path d="M15 35Q58 20 100 43Q142 20 185 35
+               V166Q142 151 100 174Q58 151 15 166Z"/>
+    `),
+
+    // Football centre circle.
+    svgMask(`<circle cx="100" cy="100" r="68"/>`),
+
+    // An editorial page.
+    svgMask(`
+      <path d="M38 12H140L166 38V188H38Z"/>
+    `)
+  ];
+
+  scenes.forEach((scene, i) => {
+    if (!i) return;
+    scene.style.setProperty("--reveal-mask", masks[i]);
+  });
+
+  function setMaskSize(scene, value) {
+    scene.style.maskSize = value;
+    scene.style.webkitMaskSize = value;
   }
 
   function render() {
-    framePending = false;
-    const documentTravel = document.documentElement.scrollHeight - innerHeight;
+    pending = false;
+
+    const travel =
+      document.documentElement.scrollHeight - innerHeight;
+
     progress.style.transform =
-      `scaleX(${clamp(scrollY / Math.max(1, documentTravel))})`;
+      `scaleX(${clamp(scrollY / Math.max(1, travel))})`;
 
     if (reduced) return;
 
-    const position = clamp(
-      -journey.getBoundingClientRect().top / step,
-      0, scenes.length
+    const position = Math.max(
+      0,
+      Math.min(
+        scenes.length,
+        -journey.getBoundingClientRect().top / step
+      )
     );
 
-    let active = 0;
+    const diagonal = Math.hypot(innerWidth, innerHeight);
+    active = 0;
 
     scenes.forEach((scene, i) => {
       const copy = scene.querySelector(".copy");
       const visual = scene.querySelector(".visual");
 
-      /*
-       * Each chapter holds, then the next scene rises across it.
-       * Progress comes directly from native scroll, so reversing
-       * direction reverses the transition immediately.
-       */
-      const entry = i === 0 ? 1 : ease(clamp(
-        (position - (i - 1) - .32) / .68
-      ));
-      const exit = ease(clamp((position - i - .32) / .68));
+      // Hold each composition before revealing the next.
+      const entry = i === 0
+        ? 1
+        : clamp((position - (i - 1) - .36) / .64);
 
-      scene.style.zIndex = i + 1;
+      const exit = i === scenes.length - 1
+        ? 0
+        : clamp((position - i - .36) / .64);
+
+      scene.style.zIndex = String(i + 1);
       scene.style.visibility = entry > 0 ? "visible" : "hidden";
-      scene.style.clipPath = `inset(${(1 - entry) * 100}% 0 0 0)`;
 
-      const lift = (1 - entry) * 14;
-      scene.style.transform = `translate3d(0, ${lift}%, 0)`;
+      // Remove the previous horizontal wipe.
+      scene.style.clipPath = "none";
+      scene.style.transform = "none";
+
+      if (i > 0) {
+        /*
+         * The incoming scene appears inside the silhouette.
+         * It starts small, then grows beyond the viewport.
+         * Its opacity blends the edge into the outgoing scene.
+         */
+        const growth = Math.pow(smooth(entry), 2.2);
+        const size = 80 + growth * diagonal * 7;
+
+        setMaskSize(scene, `${size}px ${size}px`);
+        scene.style.opacity = String(smooth(entry / .24));
+      } else {
+        scene.style.opacity = "1";
+      }
+
+      // The outgoing photograph moves towards the visitor.
+      const zoom = smooth(exit);
+      const incomingZoom = 1 - smooth(entry);
 
       visual.style.transform =
-        `translate3d(0, ${-exit * 8}%, 0) scale(${1 + exit * .16 + (1 - entry) * .08})`;
+        `translate3d(0, ${-zoom * 3}%, 0)
+         scale(${1 + zoom * .3 + incomingZoom * .12})`;
 
-      const textEntry = ease(clamp((entry - .3) / .7));
-      copy.style.opacity = textEntry * (1 - exit);
+      /*
+       * Separate text timing prevents two headings from
+       * competing during a transition.
+       */
+      const textIn = i === 0
+        ? 1
+        : smooth((entry - .76) / .24);
+
+      const textOut = 1 - smooth(exit / .28);
+
+      copy.style.opacity = String(textIn * textOut);
       copy.style.transform =
-        `translate3d(0, ${(1 - textEntry) * 28 - exit * 24}px, 0)`;
+        `translate3d(0, ${(1 - textIn) * 16}px, 0)`;
 
-      if (entry > .55) active = i;
+      const label = scene.querySelector(".chapter-number");
+      if (label) {
+        label.style.opacity = String(.6 * textIn * textOut);
+      }
+
+      if (entry >= .88) active = i;
     });
 
     scenes.forEach((scene, i) => {
@@ -500,24 +570,63 @@ body.animated .counter { display: block; }
     });
 
     counter.textContent =
-      `${String(active + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`;
+      `${String(active + 1).padStart(2, "0")} / ` +
+      String(scenes.length).padStart(2, "0");
 
     counter.style.opacity =
-      journey.getBoundingClientRect().bottom > innerHeight * .5 ? "1" : "0";
+      journey.getBoundingClientRect().bottom > innerHeight * .5
+        ? "1"
+        : "0";
+  }
+
+  function configure() {
+    step = innerHeight * 1.65;
+
+    journey.style.setProperty(
+      "--journey-height",
+      `${innerHeight + scenes.length * step}px`
+    );
+
+    document.body.classList.toggle("animated", !reduced);
+
+    scenes.forEach((scene, i) => {
+      scene.removeAttribute("style");
+      scene.querySelector(".copy").removeAttribute("style");
+      scene.querySelector(".visual").removeAttribute("style");
+
+      const label = scene.querySelector(".chapter-number");
+      if (label) label.removeAttribute("style");
+
+      scene.inert = false;
+
+      if (i > 0) {
+        scene.style.setProperty("--reveal-mask", masks[i]);
+      }
+    });
+
+    motionButton.textContent =
+      reduced ? "Enable motion" : "Reduce motion";
+
+    motionButton.setAttribute("aria-pressed", String(reduced));
+    render();
   }
 
   function requestRender() {
-    if (!framePending) {
-      framePending = true;
-      requestAnimationFrame(render);
-    }
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(render);
   }
 
   motionButton.addEventListener("click", () => {
-    const activeScene = scenes.find(scene => !scene.inert) || scenes[0];
+    const current = active;
     reduced = !reduced;
     configure();
-    if (reduced) activeScene.scrollIntoView({ block: "start" });
+
+    if (reduced) {
+      scenes[current].scrollIntoView({ block: "start" });
+    } else {
+      window.scrollTo(0, journey.offsetTop + current * step);
+    }
   });
 
   preference.addEventListener("change", event => {
@@ -527,8 +636,10 @@ body.animated .counter { display: block; }
 
   window.addEventListener("scroll", requestRender, { passive: true });
   window.addEventListener("resize", configure);
+
   configure();
 })();
+</script>
 </script>
 </body>
 </html>
