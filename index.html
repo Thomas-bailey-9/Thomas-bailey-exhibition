@@ -307,6 +307,27 @@ body:not(.animated) .scene {
   -webkit-mask-image: none;
   mask-image: none;
 }
+  .transition-symbol {
+  display: none;
+}
+
+body.animated .transition-symbol {
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background: currentColor;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  -webkit-mask-image: var(--symbol-mask);
+  mask-image: var(--symbol-mask);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
 </style>
 </head>
 
