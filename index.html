@@ -542,6 +542,48 @@ svg.monogram {
     progress.style.transform =
       `scaleX(${clamp(scrollY / Math.max(1, travel))})`;
 
+        // Sections 04–05: scroll-controlled project composition.
+    const gallery = document.getElementById("work-gallery");
+
+    if (gallery) {
+      const pictures = [...gallery.querySelectorAll(".gallery-image")];
+      const galleryStage = gallery.querySelector(".gallery-stage");
+
+      if (reduced) {
+        pictures.forEach(picture => {
+          picture.style.removeProperty("transform");
+        });
+      } else {
+        const bounds = gallery.getBoundingClientRect();
+        const distance = gallery.offsetHeight - galleryStage.offsetHeight;
+        const position = clamp(-bounds.top / Math.max(1, distance));
+        const mobile = innerWidth <= 700;
+
+        pictures.forEach((picture, index) => {
+          const starts = [95, 125, 150, 180, 210, 240];
+          const ends = [-130, -100, -160, -120, -145, -95];
+
+          const local = smooth(
+            (position - index * .055) / .70
+          );
+
+          const travel = starts[index] +
+            (ends[index] - starts[index]) * local;
+
+          const rotation = (index % 2 === 0 ? -1 : 1) *
+            (4 - local * 6);
+
+          picture.style.transform = `
+            translate3d(
+              0,
+              ${travel * (mobile ? .68 : 1)}svh,
+              0
+            )
+            rotate(${rotation}deg)
+          `;
+        });
+      }
+    }
     if (reduced) return;
 
     const heroBounds = hero.getBoundingClientRect();
