@@ -347,6 +347,286 @@ svg.monogram {
   }
 }
   
+/* SECTION 04: PROJECT COMPOSITION */
+
+.work-gallery {
+  position: relative;
+}
+
+.gallery-stage {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 100px 5vw 80px;
+}
+
+.gallery-copy {
+  position: relative;
+  z-index: 2;
+  width: min(40vw, 540px);
+  text-align: center;
+  background: var(--background);
+  padding: 28px 12px;
+}
+
+.gallery-copy h2 {
+  margin: 22px 0;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(28px, 3.4vw, 52px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -.055em;
+}
+
+.gallery-copy > p:last-child {
+  max-width: 310px;
+  margin: 0 auto;
+  color: var(--secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.gallery-image {
+  margin: 0;
+}
+
+.gallery-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.gallery-instruction {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  z-index: 3;
+  margin: 0;
+  text-align: center;
+  color: var(--secondary);
+  font-size: 11px;
+}
+
+/* Readable gallery when animation is disabled or unavailable. */
+.gallery-images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  align-items: center;
+}
+
+body:not(.motion-on) .gallery-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+body:not(.motion-on) .gallery-copy {
+  width: min(100%, 540px);
+}
+
+body:not(.motion-on) .gallery-instruction {
+  position: static;
+}
+
+body.motion-on .work-gallery {
+  height: 290svh;
+}
+
+body.motion-on .gallery-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+}
+
+body.motion-on .gallery-images {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+body.motion-on .gallery-image {
+  position: absolute;
+  top: 0;
+  will-change: transform;
+}
+
+body.motion-on .image-one {
+  left: 4%;
+  width: 19%;
+}
+
+body.motion-on .image-two {
+  right: 5%;
+  width: 21%;
+}
+
+body.motion-on .image-three {
+  left: 8%;
+  width: 21%;
+}
+
+body.motion-on .image-four {
+  right: 9%;
+  width: 17%;
+}
+
+body.motion-on .image-five {
+  left: 3%;
+  width: 20%;
+}
+
+body.motion-on .image-six {
+  right: 3%;
+  width: 20%;
+}
+
+/* SECTION 05: PROJECT INDEX */
+
+.project-index {
+  padding: 100px 6vw 140px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 75px;
+}
+
+.index-intro {
+  margin-bottom: 55px;
+}
+
+.index-intro h2 {
+  margin: 20px 0;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(42px, 6vw, 84px);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: 1.1;
+}
+
+.index-intro > p:last-child {
+  color: var(--secondary);
+  font-size: 14px;
+}
+
+.project-row {
+  display: grid;
+  grid-template-columns: 35px minmax(0, 1fr) 88px 170px 25px;
+  gap: 24px;
+  align-items: center;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+}
+
+.project-row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.project-number,
+.project-type {
+  color: var(--secondary);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.project-name {
+  font-family: Manrope, sans-serif;
+  font-size: clamp(21px, 3vw, 45px);
+  font-weight: 500;
+  letter-spacing: -.045em;
+  line-height: 1.15;
+  transition: transform .25s ease;
+}
+
+.project-row img {
+  display: block;
+  width: 88px;
+  height: 78px;
+  object-fit: contain;
+}
+
+.project-arrow {
+  font-size: 23px;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-row:hover .project-name {
+    transform: translateX(8px);
+  }
+}
+
+@media (max-width: 700px) {
+  .gallery-copy {
+    width: 54vw;
+    padding: 20px 8px;
+  }
+
+  .gallery-copy h2 {
+    font-size: clamp(23px, 5.8vw, 36px);
+  }
+
+  .gallery-copy > p:last-child {
+    font-size: 12px;
+  }
+
+  .gallery-copy .section-label {
+    font-size: 10px;
+  }
+
+  body.motion-on .gallery-image {
+    width: 24%;
+  }
+
+  body.motion-on .image-one,
+  body.motion-on .image-three,
+  body.motion-on .image-five {
+    left: 2%;
+  }
+
+  body.motion-on .image-two,
+  body.motion-on .image-four,
+  body.motion-on .image-six {
+    right: 2%;
+  }
+
+  .gallery-images {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .project-index {
+    padding: 65px 7vw 90px;
+  }
+
+  .project-row {
+    grid-template-columns: 22px minmax(0, 1fr) 58px 18px;
+    gap: 12px;
+    padding: 24px 0;
+  }
+
+  .project-row img {
+    width: 58px;
+    height: 65px;
+  }
+
+  .project-name {
+    font-size: 23px;
+  }
+
+  .project-type {
+    grid-column: 2 / 4;
+    grid-row: 2;
+  }
+
+  .project-arrow {
+    grid-column: 4;
+    grid-row: 1;
+    font-size: 19px;
+  }
+}
 </style>
 </head>
 
