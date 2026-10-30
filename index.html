@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111210">
+<meta name="description" content="Thomas Bailey's portfolio of podcast production, photography, editorial design and football storytelling.">
+<title>Thomas Bailey | Media, Sport & Design</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --background: #111210;
+  --text: #eeeae2;
+  --secondary: #b5b7ad;
+  --line: #3d4038;
+  --accent: #c1ce9c;
+}
+* { box-sizing: border-box; }
+html {
+  background: var(--background);
+  scroll-padding-top: 90px;
+}
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+button { font: inherit; }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 7px;
+}
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  padding: 24px 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--background);
+}
+.name {
+  font-family: Manrope, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.5px;
+  text-decoration: none;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+nav a, nav button {
+  font-size: 12px;
+  color: var(--text);
+  text-decoration: none;
+}
+nav button {
+  cursor: pointer;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+}
+nav a:hover, nav button:hover { color: var(--accent); }
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+}
+.hero-stage {
+  min-height: 100svh;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.monogram {
+  width: min(69vw, 830px);
+  height: auto;
+  overflow: visible;
+}
+.mark-shadow { fill: #24271f; }
+.mark-face { fill: #aab19b; }
+.mark-edge { fill: #646d56; }
+.hero-signature {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(28px, 3.4vw, 52px);
+  font-weight: 500;
+  letter-spacing: -2px;
+  line-height: .98;
+  text-align: center;
+}
+.hero-corner {
+  position: absolute;
+  bottom: 35px;
+  left: 4vw;
+  margin: 0;
+  max-width: 260px;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.scroll-link {
+  position: absolute;
+  bottom: 35px;
+  right: 4vw;
+  font-size: 12px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 7px;
+}
+.section-label {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.introduction {
+  padding: 120px 8vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 9vw;
+}
+.intro-heading {
+  margin: 28px 0;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(43px, 5.5vw, 88px);
+  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -.065em;
+}
+.intro-copy {
+  max-width: 470px;
+  margin: 0;
+  color: var(--secondary);
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.75;
+}
+.roles {
+  margin: 32px 0 0;
+  padding: 22px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  font-size: 12px;
+  color: var(--text);
+}
+.portrait {
+  margin: 0;
+  position: relative;
+}
+.portrait-window {
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: #262920;
+}
+.portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 54%;
+}
+figcaption {
+  margin-top: 15px;
+  color: var(--secondary);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.background {
+  padding: 80px 8vw 150px;
+  border-top: 1px solid var(--line);
+}
+.background-layout {
+  margin-top: 45px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 6vw;
+}
+.background-heading {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+.story {
+  margin: 0;
+  max-width: 1000px;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(28px, 4vw, 62px);
+  font-weight: 500;
+  letter-spacing: -.045em;
+  line-height: 1.3;
+}
+.story-word {
+  color: var(--secondary);
+}
+.story-note {
+  margin: 35px 0 0;
+  max-width: 490px;
+  color: var(--secondary);
+  font-size: 16px;
+  line-height: 1.8;
+}
+.next-section {
+  padding: 75px 8vw;
+  background: #dce0d2;
+  color: #20261b;
+}
+.next-section h2 {
+  margin: 15px 0 25px;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(40px, 6vw, 84px);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: 1.1;
+}
+.next-section p { max-width: 490px; line-height: 1.7; }
+.next-section a {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 14px;
+  text-underline-offset: 6px;
+}
+footer {
+  padding: 25px 4vw;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--secondary);
+  font-size: 11px;
+}
+.progress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 30;
+}
+
+/* These rules activate only when animation is available. */
+body.motion-on .hero { height: 170svh; }
+body.motion-on .hero-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+}
+body.motion-on .monogram,
+body.motion-on .hero-signature,
+body.motion-on .portrait img {
+  will-change: transform, opacity;
+}
+
+@media (max-width: 700px) {
+  .site-header { padding: 20px 6vw; }
+  .name { font-size: 13px; }
+  nav { gap: 15px; }
+  nav a, nav button { font-size: 10px; }
+  .monogram { width: 91vw; }
+  .hero-signature { font-size: 34px; letter-spacing: -1.5px; }
+  .hero-corner { left: 6vw; max-width: 180px; font-size: 11px; }
+  .scroll-link { right: 6vw; font-size: 11px; }
+  .introduction {
+    padding: 85px 7vw;
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+  .intro-heading { font-size: 54px; }
+  .intro-copy { font-size: 16px; }
+  .portrait { width: 88%; margin-left: auto; }
+  .background { padding: 60px 7vw 90px; }
+  .background-layout {
+    margin-top: 30px;
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .story { font-size: 33px; }
+  .story-note { font-size: 15px; }
+  .next-section { padding: 60px 7vw; }
+  footer { padding: 25px 7vw; flex-wrap: wrap; }
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <a class="name" href="#top">Thomas Bailey</a>
+  <nav aria-label="Main navigation">
+    <a href="#introduction">About</a>
+    <a href="portfolio-backup.html">Work ↗</a>
+    <button id="motion-button" type="button"
+            aria-pressed="false">Reduce motion</button>
+  </nav>
+</header>
+
+<main>
+  <!-- SECTION 01: OPENING IDENTITY -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero-stage">
+
+      <!-- Custom geometric TB mark, built directly into the page. -->
+      <svg class="monogram" viewBox="0 0 800 500"
+           aria-hidden="true" focusable="false">
+        <defs>
+          <path id="tb-shape" fill-rule="evenodd"
+            d="M70 75H385V155H270V425H185V155H70Z
+               M415 75H575
+               C680 75 725 120 725 175
+               C725 214 706 240 675 254
+               C715 268 740 297 740 339
+               C740 397 691 425 590 425H415Z
+               M500 150V220H572
+               C616 220 640 208 640 185
+               C640 160 617 150 572 150Z
+               M500 290V350H585
+               C629 350 652 342 652 320
+               C652 299 629 290 585 290Z"/>
+        </defs>
+        <use href="#tb-shape" class="mark-shadow"
+             transform="translate(22 23)"/>
+        <use href="#tb-shape" class="mark-edge"
+             transform="translate(9 10)"/>
+        <use href="#tb-shape" class="mark-face"/>
+      </svg>
+
+      <h1 class="hero-signature" id="hero-title">
+        Thomas<br>Bailey
+      </h1>
+
+      <p class="hero-corner">
+        Media, sport & creative work.<br>
+        A portfolio shaped by experience.
+      </p>
+
+      <a class="scroll-link" href="#introduction">
+        Scroll to explore ↓
+      </a>
+    </div>
+  </section>
+
+  <!-- SECTION 02: INTRODUCTION -->
+  <section class="introduction" id="introduction"
+           aria-labelledby="intro-title">
+    <div>
+      <p class="section-label">01 / Introduction</p>
+      <h2 class="intro-heading" id="intro-title">
+        Behind the mic.<br>
+        Behind the work.
+      </h2>
+
+      <p class="intro-copy">
+        I’m Thomas Bailey, a three-year international scholarship
+        recipient with experience in podcast production, photography
+        and editorial design.
+      </p>
+
+      <p class="intro-copy" style="margin-top: 20px;">
+        At Florida Memorial University, I worked on the Lions Country
+        Podcast, operating the soundboard, editing audio, contributing
+        on mic and leading recording sessions.
+      </p>
+
+      <ul class="roles" aria-label="Areas of experience">
+        <li>Podcast production</li>
+        <li>Audio editing</li>
+        <li>Photography</li>
+        <li>Editorial design</li>
+      </ul>
+    </div>
+
+    <figure class="portrait">
+      <div class="portrait-window">
+        <img src="6.jpg"
+             alt="Thomas Bailey wearing headphones and speaking into a studio microphone"
+             width="1440" height="1920">
+      </div>
+      <figcaption>
+        In the studio / Lions Country Podcast,
+        Florida Memorial University
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- SECTION 03: BACKGROUND -->
+  <section class="background" id="background"
+           aria-labelledby="background-title">
+    <p class="section-label">02 / My background</p>
+
+    <div class="background-layout">
+      <h2 class="background-heading" id="background-title">
+        Three years.<br>Two states.<br>A wider perspective.
+      </h2>
+
+      <div>
+        <p class="story" id="story">
+          I spent three years studying and playing football in the
+          United States, from Texas to Miami. Along the way, I worked
+          with other students to record conversations, create
+          publications and tell stories through sound and images.
+        </p>
+
+        <p class="story-note">
+          My experience brings together the teamwork of football,
+          the attention needed in a recording studio and the care
+          involved in putting a publication together.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT BUILD: SECTIONS 04–05 WILL FOLLOW HERE -->
+  <section class="next-section" aria-labelledby="work-title">
+    <p>Selected projects</p>
+    <h2 id="work-title">Explore the work.</h2>
+    <p>
+      Podcast production, a collaborative photography magazine
+      and football editorial concepts.
+    </p>
+    <a href="portfolio-backup.html">
+      View the existing project exhibition ↗
+    </a>
+  </section>
+</main>
+
+<footer>
+  <span>Thomas Bailey / Media, sport & design</span>
+  <a href="mailto:Tom03bailey@outlook.com">Get in touch ↗</a>
+</footer>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<script>
+(() => {
+  const hero = document.querySelector(".hero");
+  const stage = document.querySelector(".hero-stage");
+  const mark = document.querySelector(".monogram");
+  const signature = document.querySelector(".hero-signature");
+  const portrait = document.querySelector(".portrait img");
+  const story = document.getElementById("story");
+  const button = document.getElementById("motion-button");
+  const progress = document.getElementById("progress");
+  const preference = matchMedia("(prefers-reduced-motion: reduce)");
+
+  let reduced = preference.matches;
+  let pending = false;
+
+  const clamp = n => Math.max(0, Math.min(1, n));
+  const smooth = n => {
+    n = clamp(n);
+    return n * n * (3 - 2 * n);
+  };
+
+  // Build visual word spans while preserving normal reading order.
+  const originalText = story.textContent.trim().replace(/\s+/g, " ");
+  const words = originalText.split(" ");
+  story.textContent = "";
+
+  const wordSpans = words.map((word, i) => {
+    const span = document.createElement("span");
+    span.className = "story-word";
+    span.textContent = word;
+    story.appendChild(span);
+    if (i < words.length - 1) {
+      story.appendChild(document.createTextNode(" "));
+    }
+    return span;
+  });
+
+  function render() {
+    pending = false;
+
+    const travel =
+      document.documentElement.scrollHeight - innerHeight;
+
+    progress.style.transform =
+      `scaleX(${clamp(scrollY / Math.max(1, travel))})`;
+
+    if (reduced) return;
+
+    const heroBounds = hero.getBoundingClientRect();
+    const heroTravel = hero.offsetHeight - stage.offsetHeight;
+    const heroProgress = smooth(
+      -heroBounds.top / Math.max(1, heroTravel)
+    );
+
+    // The large mark moves away as the introduction approaches.
+    mark.style.transform =
+      `translate3d(${-heroProgress * 9}%, 0, 0)
+       scale(${1 + heroProgress * .5})
+       rotate(${-heroProgress * 7}deg)`;
+
+    mark.style.opacity = String(1 - heroProgress * .78);
+
+    signature.style.opacity =
+      String(1 - smooth(heroProgress / .65));
+
+    signature.style.transform =
+      `translate(-50%, -50%)
+       translateY(${-heroProgress * 45}px)`;
+
+    // Small image movement within its fixed photographic crop.
+    const portraitBounds = portrait.parentElement
+      .getBoundingClientRect();
+
+    const portraitProgress = clamp(
+      (innerHeight - portraitBounds.top) /
+      (innerHeight + portraitBounds.height)
+    );
+
+    portrait.style.transform =
+      `scale(${1.08 - portraitProgress * .08})`;
+
+    // Text always stays legible; scrolling adds emphasis.
+    const storyBounds = story.getBoundingClientRect();
+    const readingProgress = clamp(
+      (innerHeight * .85 - storyBounds.top) /
+      Math.max(1, storyBounds.height + innerHeight * .25)
+    );
+
+    wordSpans.forEach((word, i) => {
+      const emphasis = smooth(
+        (readingProgress * (words.length + 5) - i) / 5
+      );
+
+      const r = Math.round(181 + emphasis * 57);
+      const g = Math.round(183 + emphasis * 51);
+      const b = Math.round(173 + emphasis * 53);
+
+      word.style.color = `rgb(${r}, ${g}, ${b})`;
+    });
+  }
+
+  function requestRender() {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(render);
+  }
+
+  function configure() {
+    document.body.classList.toggle("motion-on", !reduced);
+
+    button.textContent = reduced ? "Enable motion" : "Reduce motion";
+    button.setAttribute("aria-pressed", String(reduced));
+
+    mark.removeAttribute("style");
+    signature.removeAttribute("style");
+    portrait.removeAttribute("style");
+    wordSpans.forEach(word => word.removeAttribute("style"));
+
+    render();
+  }
+
+  button.addEventListener("click", () => {
+    reduced = !reduced;
+    configure();
+  });
+
+  preference.addEventListener("change", event => {
+    reduced = event.matches;
+    configure();
+  });
+
+  window.addEventListener("scroll", requestRender, { passive: true });
+  window.addEventListener("resize", requestRender);
+
+  configure();
+})();
+</script>
+</body>
+</html>
