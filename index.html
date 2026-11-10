@@ -3,694 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#111210">
+<meta name="theme-color" content="#0f1210">
 <meta name="description" content="Thomas Bailey's portfolio of podcast production, photography, editorial design and football storytelling.">
-<title>Thomas Bailey | Media, Sport & Design</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Thomas Bailey | Media, Sport &amp; Design">
+<meta property="og:description" content="Podcast production, photography, editorial design and football storytelling.">
+<title>Thomas Bailey | Media, Sport &amp; Design</title>
 
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --background: #111210;
-  --text: #eeeae2;
-  --secondary: #b5b7ad;
-  --line: #3d4038;
-  --accent: #c1ce9c;
-}
-* { box-sizing: border-box; }
-html {
-  background: var(--background);
-  scroll-padding-top: 90px;
-}
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--text);
-  font-family: "DM Sans", sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-a { color: inherit; }
-button { font: inherit; }
-a:focus-visible, button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 7px;
-}
-.site-header {
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 20;
-  padding: 24px 4vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  background: var(--background);
-}
-.name {
-  font-family: Manrope, sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -.5px;
-  text-decoration: none;
-}
-nav {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-nav a, nav button {
-  font-size: 12px;
-  color: var(--text);
-  text-decoration: none;
-}
-nav button {
-  cursor: pointer;
-  padding: 5px 0;
-  border: 0;
-  background: transparent;
-}
-nav a:hover, nav button:hover { color: var(--accent); }
-
-.hero {
-  position: relative;
-  min-height: 100svh;
-}
-.hero-stage {
-  min-height: 100svh;
-  position: relative;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-}
-.monogram {
-  width: min(69vw, 830px);
-  height: auto;
-  overflow: visible;
-}
-.mark-shadow { fill: #24271f; }
-.mark-face { fill: #aab19b; }
-.mark-edge { fill: #646d56; }
-.hero-signature {
-  position: absolute;
-  left: 50%;
-  top: 51%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  font-family: Manrope, sans-serif;
-  font-size: clamp(28px, 3.4vw, 52px);
-  font-weight: 500;
-  letter-spacing: -2px;
-  line-height: .98;
-  text-align: center;
-}
-.hero-corner {
-  position: absolute;
-  bottom: 35px;
-  left: 4vw;
-  margin: 0;
-  max-width: 260px;
-  color: var(--secondary);
-  font-size: 12px;
-  line-height: 1.6;
-}
-.scroll-link {
-  position: absolute;
-  bottom: 35px;
-  right: 4vw;
-  font-size: 12px;
-  text-decoration: none;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 7px;
-}
-.section-label {
-  margin: 0;
-  color: var(--secondary);
-  font-size: 11px;
-  line-height: 1.5;
-}
-.introduction {
-  padding: 120px 8vw;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 9vw;
-}
-.intro-heading {
-  margin: 28px 0;
-  font-family: Manrope, sans-serif;
-  font-size: clamp(43px, 5.5vw, 88px);
-  line-height: 1.04;
-  font-weight: 500;
-  letter-spacing: -.065em;
-}
-.intro-copy {
-  max-width: 470px;
-  margin: 0;
-  color: var(--secondary);
-  font-size: clamp(16px, 1.4vw, 20px);
-  line-height: 1.75;
-}
-.roles {
-  margin: 32px 0 0;
-  padding: 22px 0 0;
-  border-top: 1px solid var(--line);
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 22px;
-  font-size: 12px;
-  color: var(--text);
-}
-.portrait {
-  margin: 0;
-  position: relative;
-}
-.portrait-window {
-  overflow: hidden;
-  aspect-ratio: 3 / 4;
-  background: #262920;
-}
-.portrait img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 54%;
-}
-figcaption {
-  margin-top: 15px;
-  color: var(--secondary);
-  font-size: 11px;
-  line-height: 1.6;
-}
-.background {
-  padding: 80px 8vw 150px;
-  border-top: 1px solid var(--line);
-}
-.background-layout {
-  margin-top: 45px;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 6vw;
-}
-.background-heading {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 500;
-}
-.story {
-  margin: 0;
-  max-width: 1000px;
-  font-family: Manrope, sans-serif;
-  font-size: clamp(28px, 4vw, 62px);
-  font-weight: 500;
-  letter-spacing: -.045em;
-  line-height: 1.3;
-}
-.story-word {
-  color: var(--secondary);
-}
-.story-note {
-  margin: 35px 0 0;
-  max-width: 490px;
-  color: var(--secondary);
-  font-size: 16px;
-  line-height: 1.8;
-}
-.next-section {
-  padding: 75px 8vw;
-  background: #dce0d2;
-  color: #20261b;
-}
-.next-section h2 {
-  margin: 15px 0 25px;
-  font-family: Manrope, sans-serif;
-  font-size: clamp(40px, 6vw, 84px);
-  font-weight: 500;
-  letter-spacing: -.06em;
-  line-height: 1.1;
-}
-.next-section p { max-width: 490px; line-height: 1.7; }
-.next-section a {
-  display: inline-block;
-  margin-top: 14px;
-  font-size: 14px;
-  text-underline-offset: 6px;
-}
-footer {
-  padding: 25px 4vw;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  color: var(--secondary);
-  font-size: 11px;
-}
-.progress {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background: var(--accent);
-  transform-origin: left;
-  transform: scaleX(0);
-  z-index: 30;
-}
-
-/* These rules activate only when animation is available. */
-body.motion-on .hero { height: 170svh; }
-body.motion-on .hero-stage {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-}
-body.motion-on .monogram,
-body.motion-on .hero-signature,
-body.motion-on .portrait img {
-  will-change: transform, opacity;
-}
-
-@media (max-width: 700px) {
-  .site-header { padding: 20px 6vw; }
-  .name { font-size: 13px; }
-  nav { gap: 15px; }
-  nav a, nav button { font-size: 10px; }
-  .monogram { width: 91vw; }
-  .hero-signature { font-size: 34px; letter-spacing: -1.5px; }
-  .hero-corner { left: 6vw; max-width: 180px; font-size: 11px; }
-  .scroll-link { right: 6vw; font-size: 11px; }
-  .introduction {
-    padding: 85px 7vw;
-    grid-template-columns: 1fr;
-    gap: 45px;
-  }
-  .intro-heading { font-size: 54px; }
-  .intro-copy { font-size: 16px; }
-  .portrait { width: 88%; margin-left: auto; }
-  .background { padding: 60px 7vw 90px; }
-  .background-layout {
-    margin-top: 30px;
-    grid-template-columns: 1fr;
-    gap: 26px;
-  }
-  .story { font-size: 33px; }
-  .story-note { font-size: 15px; }
-  .next-section { padding: 60px 7vw; }
-  footer { padding: 25px 7vw; flex-wrap: wrap; }
-}
-  .hero-stage {
-  perspective: 1000px;
-}
-
-.monogram {
-  transform-origin: 50% 50%;
-  backface-visibility: hidden;
-}
-
-.hero-signature {
-  letter-spacing: -.08em;
-  font-weight: 600;
-}
-
-body.motion-on .hero {
-  height: 200svh;
-}
-
-body.motion-on .hero-corner,
-body.motion-on .scroll-link {
-  will-change: opacity, transform;
-}
-svg.monogram {
-  display: block;
-  width: clamp(180px, 23vw, 310px);
-  height: auto;
-  color: #eeeae2;
-  transform-origin: 50% 50%;
-}
-
-.hero-signature {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-@media (max-width: 700px) {
-  svg.monogram {
-    width: clamp(170px, 48vw, 230px);
-  }
-}
-  
-/* SECTION 04: PROJECT COMPOSITION */
-
-.work-gallery {
-  position: relative;
-}
-
-.gallery-stage {
-  position: relative;
-  min-height: 100svh;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-  padding: 100px 5vw 80px;
-}
-
-.gallery-copy {
-  position: relative;
-  z-index: 2;
-  width: min(40vw, 540px);
-  text-align: center;
-  background: var(--background);
-  padding: 28px 12px;
-}
-
-.gallery-copy h2 {
-  margin: 22px 0;
-  font-family: Manrope, sans-serif;
-  font-size: clamp(28px, 3.4vw, 52px);
-  font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -.055em;
-}
-
-.gallery-copy > p:last-child {
-  max-width: 310px;
-  margin: 0 auto;
-  color: var(--secondary);
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.gallery-image {
-  margin: 0;
-}
-
-.gallery-image img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.gallery-instruction {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 30px;
-  z-index: 3;
-  margin: 0;
-  text-align: center;
-  color: var(--secondary);
-  font-size: 11px;
-}
-
-/* Readable gallery when animation is disabled or unavailable. */
-.gallery-images {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  align-items: center;
-}
-
-body:not(.motion-on) .gallery-stage {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-body:not(.motion-on) .gallery-copy {
-  width: min(100%, 540px);
-}
-
-body:not(.motion-on) .gallery-instruction {
-  position: static;
-}
-
-body.motion-on .work-gallery {
-  height: 290svh;
-}
-
-body.motion-on .gallery-stage {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-}
-
-body.motion-on .gallery-images {
-  position: absolute;
-  inset: 0;
-  display: block;
-  pointer-events: none;
-}
-
-body.motion-on .gallery-image {
-  position: absolute;
-  top: 0;
-  will-change: transform;
-}
-
-body.motion-on .image-one {
-  left: 4%;
-  width: 19%;
-}
-
-body.motion-on .image-two {
-  right: 5%;
-  width: 21%;
-}
-
-body.motion-on .image-three {
-  left: 8%;
-  width: 21%;
-}
-
-body.motion-on .image-four {
-  right: 9%;
-  width: 17%;
-}
-
-body.motion-on .image-five {
-  left: 3%;
-  width: 20%;
-}
-
-body.motion-on .image-six {
-  right: 3%;
-  width: 20%;
-}
-
-/* SECTION 05: PROJECT INDEX */
-
-.project-index {
-  padding: 100px 6vw 140px;
-  border-top: 1px solid var(--line);
-  scroll-margin-top: 75px;
-}
-
-.index-intro {
-  margin-bottom: 55px;
-}
-
-.index-intro h2 {
-  margin: 20px 0;
-  font-family: Manrope, sans-serif;
-  font-size: clamp(42px, 6vw, 84px);
-  font-weight: 500;
-  letter-spacing: -.06em;
-  line-height: 1.1;
-}
-
-.index-intro > p:last-child {
-  color: var(--secondary);
-  font-size: 14px;
-}
-
-.project-row {
-  display: grid;
-  grid-template-columns: 35px minmax(0, 1fr) 88px 170px 25px;
-  gap: 24px;
-  align-items: center;
-  padding: 28px 0;
-  border-top: 1px solid var(--line);
-  text-decoration: none;
-}
-
-.project-row:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.project-number,
-.project-type {
-  color: var(--secondary);
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-.project-name {
-  font-family: Manrope, sans-serif;
-  font-size: clamp(21px, 3vw, 45px);
-  font-weight: 500;
-  letter-spacing: -.045em;
-  line-height: 1.15;
-  transition: transform .25s ease;
-}
-
-.project-row img {
-  display: block;
-  width: 88px;
-  height: 78px;
-  object-fit: contain;
-}
-
-.project-arrow {
-  font-size: 23px;
-}
-
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .project-row:hover .project-name {
-    transform: translateX(8px);
-  }
-}
-
-@media (max-width: 700px) {
-  .gallery-copy {
-    width: 54vw;
-    padding: 20px 8px;
-  }
-
-  .gallery-copy h2 {
-    font-size: clamp(23px, 5.8vw, 36px);
-  }
-
-  .gallery-copy > p:last-child {
-    font-size: 12px;
-  }
-
-  .gallery-copy .section-label {
-    font-size: 10px;
-  }
-
-  body.motion-on .gallery-image {
-    width: 24%;
-  }
-
-  body.motion-on .image-one,
-  body.motion-on .image-three,
-  body.motion-on .image-five {
-    left: 2%;
-  }
-
-  body.motion-on .image-two,
-  body.motion-on .image-four,
-  body.motion-on .image-six {
-    right: 2%;
-  }
-
-  .gallery-images {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
-
-  .project-index {
-    padding: 65px 7vw 90px;
-  }
-
-  .project-row {
-    grid-template-columns: 22px minmax(0, 1fr) 58px 18px;
-    gap: 12px;
-    padding: 24px 0;
-  }
-
-  .project-row img {
-    width: 58px;
-    height: 65px;
-  }
-
-  .project-name {
-    font-size: 23px;
-  }
-
-  .project-type {
-    grid-column: 2 / 4;
-    grid-row: 2;
-  }
-
-  .project-arrow {
-    grid-column: 4;
-    grid-row: 1;
-    font-size: 19px;
-  }
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="page-home">
 <header class="site-header">
-  <a class="name" href="#top">Thomas Bailey</a>
+  <a class="brand" href="#top">Thomas Bailey</a>
   <nav aria-label="Main navigation">
     <a href="#introduction">About</a>
-    <a href="#selected-work">Work ↓</a>
-    <button id="motion-button" type="button"
-            aria-pressed="false">Reduce motion</button>
+    <a href="#selected-work">Work</a>
+    <a class="nav-contact" href="mailto:Tom03bailey@outlook.com">Contact</a>
+    <button id="motion-button" type="button" aria-pressed="false">Reduce motion</button>
   </nav>
 </header>
 
 <main>
-  <!-- SECTION 01: OPENING IDENTITY -->
+  <!-- SECTION 01: OPENING TITLE CARD -->
   <section class="hero" id="top" aria-labelledby="hero-title">
     <div class="hero-stage">
-
-      <!-- Custom geometric TB mark, built directly into the page. -->
-   <svg class="monogram"
-     viewBox="0 0 240 240"
-     aria-hidden="true"
-     focusable="false">
-  <g fill="currentColor">
-    <path d="M35 40H169V58H112V170H94V58H35Z"/>
-    <path fill-rule="evenodd" d="
-      M120 72H163
-      C190 72 207 86 207 107
-      C207 121 200 131 189 136
-      C205 141 216 153 216 170
-      C216 195 197 209 166 209
-      H120V98H138V191H165
-      C186 191 197 184 197 170
-      C197 156 185 149 164 149
-      H145V131H160
-      C178 131 188 123 188 109
-      C188 96 178 90 161 90
-      H120Z"/>
-  </g>
-</svg>
-
-      <h1 class="hero-signature" id="hero-title"
-    aria-label="Thomas Bailey">
-  TB
-      </h1>
+      <div class="hero-mark">
+        <!-- Custom geometric TB mark, built directly into the page. -->
+        <svg class="monogram" viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+          <g fill="currentColor">
+            <path d="M35 40H169V58H112V170H94V58H35Z"/>
+            <path fill-rule="evenodd" d="
+              M120 72H163
+              C190 72 207 86 207 107
+              C207 121 200 131 189 136
+              C205 141 216 153 216 170
+              C216 195 197 209 166 209
+              H120V98H138V191H165
+              C186 191 197 184 197 170
+              C197 156 185 149 164 149
+              H145V131H160
+              C178 131 188 123 188 109
+              C188 96 178 90 161 90
+              H120Z"/>
+          </g>
+        </svg>
+        <h1 class="hero-name display" id="hero-title">Thomas Bailey</h1>
+      </div>
 
       <p class="hero-corner">
-        Media, sport & creative work.<br>
+        Media, sport &amp; creative work.<br>
         A portfolio shaped by experience.
       </p>
 
-      <a class="scroll-link" href="#introduction">
-        Scroll to explore ↓
-      </a>
+      <a class="scroll-link" href="#introduction">Scroll to explore</a>
     </div>
   </section>
 
   <!-- SECTION 02: INTRODUCTION -->
-  <section class="introduction" id="introduction"
-           aria-labelledby="intro-title">
+  <section class="introduction" id="introduction" aria-labelledby="intro-title">
     <div>
-      <p class="section-label">01 / Introduction</p>
-      <h2 class="intro-heading" id="intro-title">
+      <p class="label">01 / Introduction</p>
+      <h2 class="intro-heading display" id="intro-title">
         Behind the mic.<br>
         Behind the work.
       </h2>
@@ -701,7 +79,7 @@ body.motion-on .image-six {
         and editorial design.
       </p>
 
-      <p class="intro-copy" style="margin-top: 20px;">
+      <p class="intro-copy">
         At Florida Memorial University, I worked on the Lions Country
         Podcast, operating the soundboard, editing audio, contributing
         on mic and leading recording sessions.
@@ -729,9 +107,8 @@ body.motion-on .image-six {
   </section>
 
   <!-- SECTION 03: BACKGROUND -->
-  <section class="background" id="background"
-           aria-labelledby="background-title">
-    <p class="section-label">02 / My background</p>
+  <section class="background" id="background" aria-labelledby="background-title">
+    <p class="label">02 / My background</p>
 
     <div class="background-layout">
       <h2 class="background-heading" id="background-title">
@@ -755,13 +132,12 @@ body.motion-on .image-six {
     </div>
   </section>
 
-   <!-- SECTION 04: MOVING PROJECT COMPOSITION -->
-  <section class="work-gallery" id="work-gallery"
-           aria-labelledby="gallery-heading">
+  <!-- SECTION 04: MOVING PROJECT COMPOSITION -->
+  <section class="work-gallery" id="work-gallery" aria-labelledby="gallery-heading">
     <div class="gallery-stage">
       <div class="gallery-copy">
-        <p class="section-label">03 / Selected work</p>
-        <h2 id="gallery-heading">
+        <p class="label">03 / Selected work</p>
+        <h2 class="display" id="gallery-heading">
           Conversations.<br>
           Images.<br>
           Different perspectives.
@@ -774,321 +150,84 @@ body.motion-on .image-six {
 
       <div class="gallery-images" aria-hidden="true">
         <figure class="gallery-image image-one">
-          <img src="podcast studio setup.jpg"
-               alt="" loading="lazy">
+          <img src="podcast studio setup.jpg" alt="" width="710" height="1112" loading="lazy" decoding="async">
         </figure>
-
         <figure class="gallery-image image-two">
-          <img src="dear-my-hbcu.jpg"
-               alt="" loading="lazy">
+          <img src="dear-my-hbcu.jpg" alt="" width="1600" height="1600" loading="lazy" decoding="async">
         </figure>
-
         <figure class="gallery-image image-three">
-          <img src="editorial-publication.jpg"
-               alt="" loading="lazy">
+          <img src="editorial-publication.jpg" alt="" width="1179" height="1292" loading="lazy" decoding="async">
         </figure>
-
         <figure class="gallery-image image-four">
-          <img src="lions country pod flyer.jpg"
-               alt="" loading="lazy">
+          <img src="lions country pod flyer.jpg" alt="" width="1236" height="1600" loading="lazy" decoding="async">
         </figure>
-
         <figure class="gallery-image image-five">
-          <img src="fullback-comparison.jpg"
-               alt="" loading="lazy">
+          <img src="fullback-comparison.jpg" alt="" width="739" height="1024" loading="lazy" decoding="async">
         </figure>
-
         <figure class="gallery-image image-six">
-          <img src="match-statistics.jpg"
-               alt="" loading="lazy">
+          <img src="match-statistics.jpg" alt="" width="744" height="1024" loading="lazy" decoding="async">
         </figure>
       </div>
 
-      <p class="gallery-instruction">
-        Keep scrolling to explore the projects ↓
-      </p>
+      <p class="gallery-instruction">Keep scrolling to explore the projects</p>
     </div>
   </section>
 
   <!-- SECTION 05: PROJECT INDEX -->
-  <section class="project-index" id="selected-work"
-           aria-labelledby="index-heading">
+  <section class="project-index" id="selected-work" aria-labelledby="index-heading">
     <div class="index-intro">
-      <p class="section-label">04 / Project index</p>
-      <h2 id="index-heading">A closer look.</h2>
-      <p>
-        Choose a project to open its existing exhibition.
-      </p>
+      <p class="label">04 / Project index</p>
+      <h2 class="display" id="index-heading">A closer look.</h2>
+      <p>Choose a project to open it in the exhibition.</p>
     </div>
 
-    <a class="project-row"
-       href="portfolio-backup.html#studio-title">
+    <a class="project-row" href="work.html#studio-title">
       <span class="project-number">01</span>
-      <span class="project-name">Lions Country Podcast</span>
-      <img src="podcast studio setup.jpg" alt="Podcast studio">
-      <span class="project-type">Audio & production</span>
-      <span class="project-arrow" aria-hidden="true">↗</span>
+      <span class="project-name display">Lions Country Podcast</span>
+      <img src="podcast studio setup.jpg" alt="Podcast studio" width="710" height="1112" loading="lazy" decoding="async">
+      <span class="project-type">Audio &amp; production</span>
     </a>
 
-    <a class="project-row"
-       href="portfolio-backup.html#hbcu-title">
+    <a class="project-row" href="work.html#hbcu-title">
       <span class="project-number">02</span>
-      <span class="project-name">Dear My HBCU</span>
-      <img src="dear-my-hbcu.jpg" alt="Dear My HBCU artwork">
+      <span class="project-name display">Dear My HBCU</span>
+      <img src="dear-my-hbcu.jpg" alt="Dear My HBCU artwork" width="1600" height="1600" loading="lazy" decoding="async">
       <span class="project-type">Podcast episode</span>
-      <span class="project-arrow" aria-hidden="true">↗</span>
     </a>
 
-    <a class="project-row"
-       href="portfolio-backup.html#editorial-title">
+    <a class="project-row" href="work.html#editorial-title">
       <span class="project-number">03</span>
-      <span class="project-name">The photography magazine</span>
-      <img src="editorial-publication.jpg"
-           alt="Thomas holding the student photography magazine">
+      <span class="project-name display">The photography magazine</span>
+      <img src="editorial-publication.jpg" alt="Thomas holding the student photography magazine" width="1179" height="1292" loading="lazy" decoding="async">
       <span class="project-type">Collaborative publication</span>
-      <span class="project-arrow" aria-hidden="true">↗</span>
     </a>
 
-    <a class="project-row"
-       href="portfolio-backup.html#analysis-title">
+    <a class="project-row" href="work.html#analysis-title">
       <span class="project-number">04</span>
-      <span class="project-name">A full-back’s perspective</span>
-      <img src="fullback-comparison.jpg"
-           alt="Full-back comparison editorial concept">
+      <span class="project-name display">A <span class="nowrap">full-back’s</span> perspective</span>
+      <img src="fullback-comparison.jpg" alt="Full-back comparison editorial concept" width="739" height="1024" loading="lazy" decoding="async">
       <span class="project-type">Editorial concept</span>
-      <span class="project-arrow" aria-hidden="true">↗</span>
     </a>
 
-    <a class="project-row"
-       href="portfolio-backup.html#statistics-title">
+    <a class="project-row" href="work.html#statistics-title">
       <span class="project-number">05</span>
-      <span class="project-name">Football by design</span>
-      <img src="match-statistics.jpg"
-           alt="Football statistics layout concept">
+      <span class="project-name display">Football by design</span>
+      <img src="match-statistics.jpg" alt="Football statistics layout concept" width="744" height="1024" loading="lazy" decoding="async">
       <span class="project-type">Information design concept</span>
-      <span class="project-arrow" aria-hidden="true">↗</span>
     </a>
   </section>
 </main>
 
-<footer>
-  <span>Thomas Bailey / Media, sport & design</span>
-  <a href="mailto:Tom03bailey@outlook.com">Get in touch ↗</a>
+<footer class="site-footer">
+  <span>Thomas Bailey / Media, sport &amp; design</span>
+  <nav aria-label="Footer">
+    <a href="work.html">View the exhibition</a>
+    <a href="mailto:Tom03bailey@outlook.com">Get in touch</a>
+  </nav>
 </footer>
 
 <div class="progress" id="progress" aria-hidden="true"></div>
 
-<script>
-(() => {
-  const hero = document.querySelector(".hero");
-  const stage = document.querySelector(".hero-stage");
-  const mark = document.querySelector(".monogram");
-  const signature = document.querySelector(".hero-signature");
-  const portrait = document.querySelector(".portrait img");
-  const story = document.getElementById("story");
-  const button = document.getElementById("motion-button");
-  const progress = document.getElementById("progress");
-  const preference = matchMedia("(prefers-reduced-motion: reduce)");
-
-  let reduced = preference.matches;
-  let pending = false;
-
-  const clamp = n => Math.max(0, Math.min(1, n));
-  const smooth = n => {
-    n = clamp(n);
-    return n * n * (3 - 2 * n);
-  };
-
-  // Build visual word spans while preserving normal reading order.
-  const originalText = story.textContent.trim().replace(/\s+/g, " ");
-  const words = originalText.split(" ");
-  story.textContent = "";
-
-  const wordSpans = words.map((word, i) => {
-    const span = document.createElement("span");
-    span.className = "story-word";
-    span.textContent = word;
-    story.appendChild(span);
-    if (i < words.length - 1) {
-      story.appendChild(document.createTextNode(" "));
-    }
-    return span;
-  });
-
-  function render() {
-    pending = false;
-
-    const travel =
-      document.documentElement.scrollHeight - innerHeight;
-
-    progress.style.transform =
-      `scaleX(${clamp(scrollY / Math.max(1, travel))})`;
-
-        // Sections 04–05: scroll-controlled project composition.
-    const gallery = document.getElementById("work-gallery");
-
-    if (gallery) {
-      const pictures = [...gallery.querySelectorAll(".gallery-image")];
-      const galleryStage = gallery.querySelector(".gallery-stage");
-
-      if (reduced) {
-        pictures.forEach(picture => {
-          picture.style.removeProperty("transform");
-        });
-      } else {
-        const bounds = gallery.getBoundingClientRect();
-        const distance = gallery.offsetHeight - galleryStage.offsetHeight;
-        const position = clamp(-bounds.top / Math.max(1, distance));
-        const mobile = innerWidth <= 700;
-
-        pictures.forEach((picture, index) => {
-          const starts = [95, 125, 150, 180, 210, 240];
-          const ends = [-130, -100, -160, -120, -145, -95];
-
-          const local = smooth(
-            (position - index * .055) / .70
-          );
-
-          const travel = starts[index] +
-            (ends[index] - starts[index]) * local;
-
-          const rotation = (index % 2 === 0 ? -1 : 1) *
-            (4 - local * 6);
-
-          picture.style.transform = `
-            translate3d(
-              0,
-              ${travel * (mobile ? .68 : 1)}svh,
-              0
-            )
-            rotate(${rotation}deg)
-          `;
-        });
-      }
-    }
-    if (reduced) return;
-
-    const heroBounds = hero.getBoundingClientRect();
-    const heroTravel = hero.offsetHeight - stage.offsetHeight;
-    const heroProgress = smooth(
-      -heroBounds.top / Math.max(1, heroTravel)
-    );
-
-       // The opening holds briefly, then moves towards the viewer.
-    const movement = smooth(
-      (heroProgress - .08) / .72
-    );
-
-    // Everything is completely invisible before the stage releases.
-    const disappearance = smooth(
-      (heroProgress - .30) / .45
-    );
-
-    const signatureExit = smooth(
-      (heroProgress - .06) / .28
-    );
-
-    mark.style.transform = `
-      translate3d(
-        ${-movement * 8}%,
-        ${-movement * 12}%,
-        0
-      )
-      rotateY(${movement * -24}deg)
-      rotateX(${movement * 12}deg)
-      rotateZ(${movement * -8}deg)
-      scale(${1 + movement * 1.7})
-    `;
-
-    mark.style.opacity =   
-      heroProgress >= .75 ? "0" : String(1 - disappearance);
-
-    signature.style.opacity = String(1 - signatureExit);
-    signature.style.transform = `
-      translate(-50%, -50%)
-      translateY(${-signatureExit * 55}px)
-      scale(${1 + signatureExit * .18})
-    `;
-
-    const corner = document.querySelector(".hero-corner");
-    const scrollLink = document.querySelector(".scroll-link");
-    const detailExit = smooth(heroProgress / .35);
-
-    [corner, scrollLink].forEach(element => {
-      element.style.opacity = String(1 - detailExit);
-      element.style.transform =
-        `translateY(${-detailExit * 20}px)`;
-    });
-
-    // Small image movement within its fixed photographic crop.
-    const portraitBounds = portrait.parentElement
-      .getBoundingClientRect();
-
-    const portraitProgress = clamp(
-      (innerHeight - portraitBounds.top) /
-      (innerHeight + portraitBounds.height)
-    );
-
-    portrait.style.transform =
-      `scale(${1.08 - portraitProgress * .08})`;
-
-    // Text always stays legible; scrolling adds emphasis.
-    const storyBounds = story.getBoundingClientRect();
-    const readingProgress = clamp(
-      (innerHeight * .85 - storyBounds.top) /
-      Math.max(1, storyBounds.height + innerHeight * .25)
-    );
-
-    wordSpans.forEach((word, i) => {
-      const emphasis = smooth(
-        (readingProgress * (words.length + 5) - i) / 5
-      );
-
-      const r = Math.round(181 + emphasis * 57);
-      const g = Math.round(183 + emphasis * 51);
-      const b = Math.round(173 + emphasis * 53);
-
-      word.style.color = `rgb(${r}, ${g}, ${b})`;
-    });
-  }
-
-  function requestRender() {
-    if (pending) return;
-    pending = true;
-    requestAnimationFrame(render);
-  }
-
-  function configure() {
-    document.body.classList.toggle("motion-on", !reduced);
-
-    button.textContent = reduced ? "Enable motion" : "Reduce motion";
-    button.setAttribute("aria-pressed", String(reduced));
-
-    document.querySelector(".hero-corner").removeAttribute("style");
-document.querySelector(".scroll-link").removeAttribute("style");
-    mark.removeAttribute("style");
-    signature.removeAttribute("style");
-    portrait.removeAttribute("style");
-    wordSpans.forEach(word => word.removeAttribute("style"));
-
-    render();
-  }
-
-  button.addEventListener("click", () => {
-    reduced = !reduced;
-    configure();
-  });
-
-  preference.addEventListener("change", event => {
-    reduced = event.matches;
-    configure();
-  });
-
-  window.addEventListener("scroll", requestRender, { passive: true });
-  window.addEventListener("resize", requestRender);
-
-  configure();
-})();
-</script>
+<script src="home.js"></script>
 </body>
 </html>

@@ -1,0 +1,891 @@
+/*
+  Thomas Bailey portfolio: shared styles.
+
+  Used by both pages:
+    index.html  (home)        -> <body class="page-home">
+    work.html   (exhibition)  -> <body class="page-work">
+
+  Sections in this file:
+    1. Design tokens (colours, type, spacing)
+    2. Base elements
+    3. Shared pieces (header, labels, links, progress bar)
+    4. Home page
+    5. Exhibition page
+*/
+
+/* 1. DESIGN TOKENS ------------------------------------------------ */
+
+:root {
+  /* Colour */
+  --night: #0f1210;   /* main dark background */
+  --pitch: #172d25;   /* deep green */
+  --paper: #efebe2;   /* warm off-white */
+  --ink: #1c2a22;     /* text on paper */
+  --mist: #b3b6ab;    /* secondary text on dark */
+  --rule: #363a32;    /* thin lines on dark */
+  --sage: #c1ce9c;    /* accent */
+  --amber: #d6924e;   /* progress bar and keyboard focus */
+
+  /* Type: one family, two widths. Condensed for headlines, normal for reading. */
+  --display: "Archivo", "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+  --text: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --size-small: 0.8125rem;                        /* 13px */
+  --size-body: 1.0625rem;                         /* 17px */
+  --size-lead: clamp(1.0625rem, 1.35vw, 1.25rem);
+  --size-h3: clamp(1.5rem, 3.4vw, 3.25rem);
+  --size-h2: clamp(2.5rem, 6vw, 6.25rem);
+  --size-h1: clamp(4.5rem, 11vw, 11.25rem);
+
+  /* Spacing */
+  --gutter: clamp(20px, 5vw, 76px);
+  --section: clamp(72px, 11vw, 150px);
+}
+
+/* 2. BASE ELEMENTS ------------------------------------------------ */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  background: var(--night);
+  scroll-padding-top: 88px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--paper);
+  font-family: var(--text);
+  font-size: var(--size-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+h1, h2, h3, p, figure { margin: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 6px;
+}
+
+/* 3. SHARED PIECES ------------------------------------------------ */
+
+/* Condensed headline style used across both pages. */
+.display {
+  font-family: var(--display);
+  font-stretch: 68%;
+  font-weight: 650;
+  line-height: 0.96;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+/* Small label above a section, for example "01 / Introduction". */
+.label {
+  font-size: var(--size-small);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: var(--mist);
+}
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px var(--gutter);
+}
+
+.brand {
+  font-family: var(--display);
+  font-stretch: 80%;
+  font-weight: 700;
+  font-size: 1.1875rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nowrap { white-space: nowrap; }
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.2vw, 30px);
+}
+
+.site-header nav a,
+.site-header nav button {
+  font-size: 0.875rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header nav button {
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.site-header nav a:hover,
+.site-header nav button:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.text-link {
+  display: inline-block;
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 7px;
+}
+
+.text-link:hover { text-decoration-thickness: 2px; }
+
+.progress {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 60;
+  width: 100%;
+  height: 3px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* 4. HOME PAGE ---------------------------------------------------- */
+
+.page-home .site-header {
+  background: rgb(15 18 16 / 0.86);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+/* 4.1 Opening title card */
+
+.hero { position: relative; }
+
+.hero-stage {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.hero-mark {
+  display: grid;
+  justify-items: center;
+  gap: clamp(22px, 3.4vh, 40px);
+}
+
+.monogram {
+  display: block;
+  width: clamp(170px, 22vw, 300px);
+  height: auto;
+  color: var(--paper);
+  transform-origin: 50% 50%;
+}
+
+.hero-name {
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-stretch: 72%;
+  line-height: 1;
+}
+
+.hero-corner,
+.scroll-link {
+  position: absolute;
+  bottom: 34px;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.hero-corner {
+  left: var(--gutter);
+  max-width: 280px;
+  color: var(--mist);
+}
+
+.scroll-link {
+  right: var(--gutter);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 7px;
+}
+
+/* With motion on, the title card stays in place while you scroll through it. */
+.motion-on .hero { height: 190svh; }
+
+.motion-on .hero-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+}
+
+.motion-on .monogram,
+.motion-on .hero-name,
+.motion-on .hero-corner,
+.motion-on .scroll-link,
+.motion-on .portrait img {
+  will-change: transform, opacity;
+}
+
+/* 4.2 Introduction */
+
+.introduction {
+  padding: var(--section) var(--gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: clamp(40px, 8vw, 130px);
+}
+
+.intro-heading {
+  margin: 26px 0 34px;
+  font-size: var(--size-h2);
+}
+
+.intro-copy {
+  max-width: 46ch;
+  color: var(--mist);
+  font-size: var(--size-lead);
+  line-height: 1.7;
+}
+
+.intro-copy + .intro-copy { margin-top: 20px; }
+
+.roles {
+  margin: 36px 0 0;
+  padding: 22px 0 0;
+  border-top: 1px solid var(--rule);
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  font-size: 0.9375rem;
+}
+
+.portrait {
+  justify-self: end;
+  width: 100%;
+  max-width: 540px;
+}
+
+.portrait-window {
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: #23261f;
+}
+
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 54%;
+}
+
+.portrait figcaption {
+  margin-top: 14px;
+  color: var(--mist);
+  font-size: var(--size-small);
+  line-height: 1.6;
+}
+
+/* 4.3 Background */
+
+.background {
+  padding: clamp(60px, 7vw, 90px) var(--gutter) var(--section);
+  border-top: 1px solid var(--rule);
+}
+
+.background-layout {
+  margin-top: 44px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  gap: clamp(26px, 6vw, 90px);
+}
+
+.background-heading {
+  font-family: var(--display);
+  font-stretch: 72%;
+  font-size: 1.5rem;
+  font-weight: 650;
+  line-height: 1.12;
+}
+
+.story {
+  max-width: 22em;
+  font-size: clamp(1.625rem, 3.5vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.24;
+  text-wrap: pretty;
+}
+
+/* Words start slightly dimmed and brighten as you read down the page. */
+.motion-on .story-word { color: #868a7f; }
+
+.story-note {
+  margin-top: 36px;
+  max-width: 50ch;
+  color: var(--mist);
+  line-height: 1.75;
+}
+
+/* 4.4 Moving project composition */
+
+.work-gallery { position: relative; }
+
+.gallery-stage {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 110px var(--gutter) 80px;
+}
+
+.gallery-copy {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 540px);
+  text-align: center;
+  background: var(--night);
+  padding: 28px 12px;
+}
+
+.gallery-copy h2 {
+  margin: 20px 0 22px;
+  font-size: clamp(2rem, 4.3vw, 4rem);
+}
+
+.gallery-copy > p:last-child {
+  max-width: 320px;
+  margin: 0 auto;
+  color: var(--mist);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+/* Still layout, shown when motion is reduced or unavailable. */
+.gallery-images {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: center;
+  width: min(100%, 980px);
+}
+
+.gallery-image img { width: 100%; height: auto; }
+
+.gallery-instruction {
+  color: var(--mist);
+  font-size: var(--size-small);
+  text-align: center;
+}
+
+/* Scroll-driven layout. */
+.motion-on .work-gallery { height: 250svh; }
+
+.motion-on .gallery-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: grid;
+  place-items: center;
+  gap: 0;
+}
+
+.motion-on .gallery-copy { width: min(40vw, 540px); }
+
+.motion-on .gallery-images {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: auto;
+  pointer-events: none;
+}
+
+.motion-on .gallery-image {
+  position: absolute;
+  top: 0;
+  will-change: transform;
+}
+
+.motion-on .image-one   { left: 4%;  width: 19%; }
+.motion-on .image-two   { right: 5%; width: 21%; }
+.motion-on .image-three { left: 8%;  width: 21%; }
+.motion-on .image-four  { right: 9%; width: 17%; }
+.motion-on .image-five  { left: 3%;  width: 20%; }
+.motion-on .image-six   { right: 3%; width: 20%; }
+
+.motion-on .gallery-instruction {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  z-index: 3;
+}
+
+/* 4.5 Project index */
+
+.project-index {
+  padding: clamp(70px, 8vw, 110px) var(--gutter) var(--section);
+  border-top: 1px solid var(--rule);
+  scroll-margin-top: 70px;
+}
+
+.index-intro { margin-bottom: 54px; }
+
+.index-intro h2 {
+  margin: 20px 0 18px;
+  font-size: var(--size-h2);
+}
+
+.index-intro > p:last-child { color: var(--mist); }
+
+.project-row {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 72px minmax(0, 200px);
+  gap: clamp(14px, 2.4vw, 34px);
+  align-items: center;
+  padding: 22px 0;
+  border-top: 1px solid var(--rule);
+  text-decoration: none;
+}
+
+.project-row:last-child { border-bottom: 1px solid var(--rule); }
+
+.project-number,
+.project-type {
+  color: var(--mist);
+  font-size: var(--size-small);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+.project-name {
+  font-size: var(--size-h3);
+  line-height: 1.05;
+  transition: transform 0.25s ease;
+}
+
+.project-row img {
+  width: 72px;
+  height: 90px;
+  object-fit: cover;
+  object-position: 50% 20%;
+  background: #23261f;
+}
+
+.project-row:hover .project-name,
+.project-row:focus-visible .project-name { color: var(--sage); }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-row:hover .project-name { transform: translateX(10px); }
+}
+
+/* 4.6 Footer */
+
+.site-footer {
+  padding: 28px var(--gutter) 34px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 14px 30px;
+  border-top: 1px solid var(--rule);
+  color: var(--mist);
+  font-size: 0.875rem;
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+}
+
+.site-footer a {
+  color: var(--paper);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+
+/* 4.7 Home page on small screens */
+
+@media (max-width: 700px) {
+  .site-header { padding: 18px var(--gutter); }
+  .brand { font-size: 1.0625rem; }
+  .site-header nav a,
+  .site-header nav button { font-size: 0.8125rem; }
+  /* The footer and closing section carry the contact link on phones. */
+  .page-home .site-header nav .nav-contact { display: none; }
+
+  .monogram { width: clamp(160px, 46vw, 220px); }
+  .hero-corner { max-width: 190px; font-size: var(--size-small); }
+  .scroll-link { font-size: var(--size-small); }
+
+  .introduction {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 46px;
+  }
+  .intro-heading { font-size: clamp(2.375rem, 11.5vw, 4rem); }
+  .portrait { width: 88%; justify-self: end; }
+
+  .background-layout { grid-template-columns: minmax(0, 1fr); }
+
+  .gallery-images {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .motion-on .gallery-copy {
+    width: 54vw;
+    padding: 20px 8px;
+  }
+  .motion-on .gallery-copy h2 { font-size: clamp(1.5rem, 6.4vw, 2.375rem); }
+  .motion-on .gallery-copy > p:last-child { font-size: var(--size-small); }
+  .motion-on .gallery-image { width: 22%; }
+  .motion-on .image-one,
+  .motion-on .image-three,
+  .motion-on .image-five { left: 2%; }
+  .motion-on .image-two,
+  .motion-on .image-four,
+  .motion-on .image-six { right: 2%; }
+
+  .index-intro h2 { font-size: clamp(2.375rem, 11.5vw, 4rem); }
+  .project-row {
+    grid-template-columns: 26px minmax(0, 1fr) 54px;
+    gap: 4px 14px;
+    padding: 18px 0;
+  }
+  .project-row img {
+    grid-column: 3;
+    grid-row: 1 / 3;
+    width: 54px;
+    height: 68px;
+  }
+  .project-name { font-size: 1.625rem; }
+  .project-type {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+/* 5. EXHIBITION PAGE ---------------------------------------------- */
+
+.page-work,
+html:has(.page-work) { background: var(--paper); }
+
+.page-work { color: var(--ink); }
+
+/* White text with a blend mode stays readable over every scene colour. */
+.page-work .site-header {
+  color: #fff;
+  mix-blend-mode: difference;
+}
+
+/* 5.1 Scenes */
+
+.scene {
+  position: relative;
+  min-height: 100svh;
+  padding: 112px 6vw 78px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 6vw;
+  overflow: hidden;
+  background: var(--scene-bg, var(--paper));
+  color: var(--scene-color, var(--ink));
+}
+
+.scene .eyebrow {
+  margin-bottom: 20px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+/* Headlines also respect the height of the screen, so short laptops fit. */
+.scene h1 { font-size: min(var(--size-h1), 19svh); line-height: 0.9; }
+.scene h2 { font-size: min(var(--size-h2), 12svh); }
+
+.scene .copy p:not(.eyebrow) {
+  max-width: 40ch;
+  margin-top: 26px;
+  font-size: var(--size-lead);
+  line-height: 1.65;
+}
+
+.scene .copy p.hint {
+  max-width: 42ch;
+  padding-left: 16px;
+  border-left: 1px solid currentColor;
+  font-size: 0.9375rem;
+  opacity: 0.8;
+}
+
+.scene .text-link { margin-top: 26px; }
+
+.visual {
+  position: relative;
+  width: 100%;
+  height: 68svh;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Scene colours and image treatment. */
+.portrait-scene .visual {
+  width: 78%;
+  height: 72svh;
+  justify-self: center;
+}
+.portrait-scene .visual img {
+  object-fit: cover;
+  object-position: 50% 56%;
+}
+
+.studio { --scene-bg: #172d25; --scene-color: #f2eee4; }
+.studio .visual img { object-fit: cover; object-position: center; }
+
+.podcast { --scene-bg: #e7e2d6; }
+.podcast .visual img { filter: drop-shadow(0 26px 44px rgb(28 42 34 / 0.2)); }
+
+.hbcu { --scene-bg: #1733ba; --scene-color: #fff; }
+
+.editorial { --scene-bg: #dfd7ca; }
+.editorial .visual img { object-fit: cover; }
+
+.analysis { --scene-bg: #24372f; --scene-color: #f3eee4; }
+.analysis .visual img { filter: drop-shadow(0 26px 44px rgb(0 0 0 / 0.32)); }
+
+.statistics { --scene-bg: #ede9e1; }
+
+.chapter-number {
+  position: absolute;
+  left: 6vw;
+  bottom: 26px;
+  font-size: var(--size-small);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+/* 5.2 Scene counter with previous and next buttons */
+
+.pager {
+  display: none;
+  position: fixed;
+  right: var(--gutter);
+  bottom: 18px;
+  z-index: 40;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  mix-blend-mode: difference;
+  font-size: var(--size-small);
+  font-variant-numeric: tabular-nums;
+  transition: opacity 0.2s ease;
+}
+
+.pager button {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.pager button:disabled { opacity: 0.35; cursor: default; }
+.pager svg { width: 14px; height: 14px; }
+.pager .count { min-width: 5ch; text-align: center; }
+
+/* 5.3 Closing section */
+
+.end {
+  min-height: 85svh;
+  padding: 120px 8vw 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--pitch);
+  color: #f2eee4;
+}
+
+.end .eyebrow { font-size: 0.9375rem; font-weight: 500; }
+
+.end h2 {
+  max-width: 12em;
+  margin: 20px 0 28px;
+  font-size: var(--size-h2);
+}
+
+.end p:not(.eyebrow) { max-width: 54ch; line-height: 1.75; }
+
+.end .links {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 34px;
+}
+
+.end footer {
+  margin-top: 76px;
+  font-size: var(--size-small);
+  opacity: 0.65;
+}
+
+/* 5.4 Scroll-driven version. These rules switch on once the script has started. */
+
+.animated .journey { height: var(--journey-height); }
+
+.animated .stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.animated .scene {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  min-height: 0;
+}
+
+.animated .visual {
+  transform-origin: 50% 55%;
+  will-change: transform, opacity;
+}
+
+.animated .copy { will-change: transform, opacity; }
+.animated .pager { display: flex; }
+
+/* Each new scene arrives through a silhouette that grows from a small symbol. */
+.animated .scene:not(:first-child) {
+  -webkit-mask-image: var(--reveal-mask);
+  mask-image: var(--reveal-mask);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 0 0;
+  mask-size: 0 0;
+  will-change: mask-size, opacity;
+}
+
+.transition-symbol { display: none; }
+
+.animated .transition-symbol {
+  display: block;
+  position: absolute;
+  width: var(--symbol-size, 64px);
+  height: var(--symbol-size, 64px);
+  background: currentColor;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  -webkit-mask: var(--symbol-mask) center / contain no-repeat;
+  mask: var(--symbol-mask) center / contain no-repeat;
+}
+
+/* 5.5 Exhibition on phones and upright tablets */
+
+@media (max-width: 900px) {
+  .scene {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    align-content: center;
+    gap: 22px;
+    padding: 88px 7vw 62px;
+  }
+  .scene h1 { font-size: clamp(3.5rem, 17vw, 5.5rem); }
+  .scene h2 { font-size: clamp(2.375rem, 11.5vw, 3.75rem); }
+  .scene .eyebrow { margin-bottom: 12px; font-size: var(--size-small); }
+  .scene .copy p:not(.eyebrow) {
+    max-width: 54ch;
+    margin-top: 14px;
+    font-size: clamp(0.9375rem, 2.1vw, 1.125rem);
+    line-height: 1.5;
+  }
+  .scene .copy p.hint { font-size: var(--size-small); }
+  .scene .text-link { margin-top: 12px; font-size: 0.875rem; }
+
+  .visual,
+  .portrait-scene .visual {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+  .portrait-scene .visual { width: 76%; }
+  body:not(.animated) .visual { height: 55svh; }
+
+  .chapter-number { left: 7vw; bottom: 24px; }
+  .pager { right: 4vw; bottom: 14px; }
+  .end { padding: 96px 7vw 34px; }
+}
+
+/* Narrow phones: keep the header and the bottom row uncrowded. */
+@media (max-width: 480px) {
+  .site-header nav { gap: 12px; }
+  .page-work .site-header nav .nav-home { display: none; }
+
+  /* The chapter label already carries the scene number. */
+  .pager .count { display: none; }
+  .animated .chapter-number {
+    max-width: calc(86vw - 96px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 350px) {
+  .brand { font-size: 1rem; }
+  .site-header nav { gap: 10px; }
+  .site-header nav a,
+  .site-header nav button { font-size: 0.75rem; }
+}
+
+/* Short laptop screens. */
+@media (max-height: 760px) and (min-width: 901px) {
+  .scene { padding-top: 88px; padding-bottom: 60px; }
+  .scene .copy p:not(.eyebrow) { margin-top: 16px; font-size: 1rem; }
+  .scene .copy p.hint { font-size: 0.875rem; }
+  .scene .text-link { margin-top: 18px; }
+  .visual,
+  .portrait-scene .visual { height: 66svh; }
+}
+
+/* Printing or saving as PDF gives a plain, readable version. */
+@media print {
+  .site-header, .progress, .pager, .transition-symbol { display: none !important; }
+}
